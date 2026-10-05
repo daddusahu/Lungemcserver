@@ -1,0 +1,2101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lunge MC — Minecraft SMP</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bungee&family=Chakra+Petch:wght@400;500;600;700&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#030814;--bg2:#071326;--panel:rgba(7,18,37,.72);--line:rgba(87,198,255,.22);--text:#f3f8ff;--muted:#a9bfd6;--cyan:#1fd2ff;--blue:#297cff;--green:#22e38a;--purple:#8c68ff;--red:#ff4d55}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Chakra Petch',Segoe UI,Arial,sans-serif;color:var(--text);background:radial-gradient(circle at 50% -10%,#123c73 0,#071326 35%,#02050d 80%);line-height:1.55;overflow-x:hidden}
+a{color:inherit}
+body::before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.16;background-image:linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);background-size:48px 48px;mask-image:linear-gradient(to bottom,rgba(0,0,0,.65),transparent 55%);z-index:0}
+.nav{position:fixed;top:0;left:0;right:0;height:78px;z-index:50;display:flex;align-items:center;justify-content:center;background:rgba(2,7,17,.74);border-bottom:1px solid rgba(255,255,255,.08);backdrop-filter:blur(16px)}
+.nav-inner{width:min(1180px,92vw);display:flex;align-items:center;justify-content:space-between;gap:24px}
+.logo{font-family:'Bungee',sans-serif;font-size:24px;letter-spacing:1px;white-space:nowrap;text-shadow:0 2px 0 #020815,0 0 20px rgba(31,210,255,.16)}.logo span{color:var(--cyan);text-shadow:0 0 18px rgba(31,210,255,.55)}
+.nav ul{display:flex;align-items:center;gap:27px;list-style:none;color:#c6d7e8;font-family:'Rajdhani',sans-serif;font-weight:700;font-size:15px;letter-spacing:.4px}.nav a{text-decoration:none;transition:.2s}.nav a:hover{color:#fff;text-shadow:0 0 14px rgba(31,210,255,.45)}
+.nav-social{display:flex;gap:9px;align-items:center}.nav-discord{padding:11px 17px;border:1px solid rgba(31,210,255,.45);border-radius:999px;color:#ecfaff!important;box-shadow:0 0 22px rgba(31,210,255,.08);background:rgba(5,20,39,.55)}
+.hero{min-height:100vh;padding:112px 5vw 70px;position:relative;display:flex;align-items:center;justify-content:center;overflow:hidden;background:radial-gradient(circle at 50% 24%,rgba(25,182,255,.28),transparent 28%),radial-gradient(circle at 15% 45%,rgba(33,101,255,.18),transparent 26%),radial-gradient(circle at 85% 44%,rgba(131,83,255,.14),transparent 24%),linear-gradient(180deg,#01040b 0,#04142c 54%,#020712 100%)}
+.hero::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 0 52%,rgba(3,13,27,.08) 52% 100%),radial-gradient(circle at 50% 90%,rgba(22,177,255,.22),transparent 34%);}
+.stars{position:absolute;inset:0;background-image:radial-gradient(circle,rgba(255,255,255,.75) 0 1px,transparent 1.6px);background-size:110px 110px;opacity:.25;transform:translateY(-10px)}
+.cloud{position:absolute;height:26px;width:110px;background:rgba(116,177,225,.10);filter:blur(2px);border-radius:20px;opacity:.8}.c1{left:7%;top:22%;transform:scale(.8)}.c2{right:10%;top:29%;transform:scale(1.05)}.c3{left:23%;top:40%;transform:scale(.6)}
+.island{position:absolute;border-radius:50% 50% 22% 22%;filter:drop-shadow(0 20px 25px rgba(0,0,0,.42));background:linear-gradient(180deg,#1e9b56 0 18%,#6d4327 18% 72%,#271a18 72%);clip-path:polygon(4% 8%,96% 4%,88% 65%,77% 88%,66% 100%,31% 94%,18% 76%,8% 42%)}
+.i1{width:260px;height:170px;left:-34px;bottom:18%;transform:rotate(-7deg)}.i2{width:240px;height:160px;right:-30px;bottom:22%;transform:rotate(9deg);filter:drop-shadow(0 20px 25px rgba(0,0,0,.42))}
+.i3{width:190px;height:120px;left:9%;top:36%;transform:scale(.72);opacity:.8}.i4{width:190px;height:120px;right:10%;top:40%;transform:scale(.64);opacity:.75}
+.waterfall{position:absolute;width:28px;height:150px;border-radius:0 0 16px 16px;background:linear-gradient(90deg,rgba(43,208,255,.25),rgba(88,224,255,.98),rgba(33,126,255,.25));box-shadow:0 0 28px rgba(37,190,255,.45);filter:blur(.15px)}.w1{left:13%;bottom:16%}.w2{right:18%;bottom:20%;height:132px}
+.hero-content{position:relative;z-index:5;width:min(940px,95vw);text-align:center}
+.hero-pill{display:inline-flex;align-items:center;gap:9px;padding:9px 17px;border-radius:999px;border:1px solid rgba(255,174,64,.58);background:linear-gradient(135deg,rgba(83,35,12,.88),rgba(38,15,26,.9));color:#ffe2a8;font-size:12px;font-weight:900;letter-spacing:1.1px;box-shadow:0 0 24px rgba(255,142,36,.18),inset 0 0 14px rgba(255,190,75,.07);text-shadow:0 0 12px rgba(255,168,54,.28)}
+.hero h1{font-family:'Bungee',sans-serif;font-size:clamp(52px,9vw,108px);line-height:.92;margin:20px 0 14px;font-weight:400;letter-spacing:1px;text-transform:uppercase;background:linear-gradient(180deg,#ffffff 0%,#dff7ff 38%,#40d9ff 72%,#4c7dff 100%);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-stroke:1px rgba(255,255,255,.18);filter:drop-shadow(0 6px 0 #061126) drop-shadow(0 0 24px rgba(31,210,255,.5))}.hero h1 span{color:var(--cyan)}
+.hero-sub{font-family:'Rajdhani',sans-serif;font-size:19px;font-weight:600;letter-spacing:.5px;color:#b9cee1;max-width:700px;margin:0 auto 23px}
+.hero-actions{display:flex;justify-content:center;gap:12px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;padding:13px 22px;border-radius:12px;text-decoration:none;font-weight:900;border:1px solid transparent;transition:transform .18s,box-shadow .18s,background .18s}.btn:hover{transform:translateY(-3px)}
+.btn-primary{background:linear-gradient(135deg,#12cbff,#2a6eff);color:#fff;box-shadow:0 12px 30px rgba(31,138,255,.24)}.btn-secondary{background:rgba(6,17,34,.74);border-color:rgba(31,210,255,.45);color:#def8ff}
+.server-card{width:min(700px,94vw);margin:28px auto 0;display:grid;grid-template-columns:1.1fr 2fr 1fr;gap:12px;align-items:center;padding:15px 18px;border-radius:18px;background:rgba(2,14,29,.75);border:1px solid rgba(39,185,255,.35);box-shadow:0 20px 55px rgba(0,0,0,.34),0 0 36px rgba(31,190,255,.08);backdrop-filter:blur(10px)}
+.server-cell{padding:8px 12px;border-right:1px solid rgba(255,255,255,.09)}.server-cell:last-child{border-right:0}.online{color:var(--green);font-weight:900}.server-ip{font-size:15px;font-weight:900;letter-spacing:.2px}.server-meta{font-size:12px;color:#88a6bf;margin-top:3px}
+main,section{position:relative;z-index:2}
+.section{padding:105px 5vw;background:linear-gradient(180deg,#020712,#071022)}.section.alt{background:linear-gradient(180deg,#071022,#030814)}
+.section-wrap{width:min(1180px,92vw);margin:auto}.eyebrow{font-size:12px;letter-spacing:2.4px;text-transform:uppercase;color:var(--cyan);font-weight:900;text-align:center;margin-bottom:9px}.section-title{font-family:'Rajdhani',sans-serif;font-size:clamp(36px,5vw,54px);font-weight:700;letter-spacing:1px;text-transform:uppercase;text-align:center;line-height:1.05;margin-bottom:11px}.section-sub{color:var(--muted);text-align:center;max-width:720px;margin:0 auto 42px}
+.feature-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}.feature{padding:28px 22px;border-radius:18px;background:linear-gradient(180deg,rgba(11,27,51,.84),rgba(5,13,28,.86));border:1px solid rgba(88,171,255,.16);box-shadow:0 14px 35px rgba(0,0,0,.22);transition:.22s;overflow:hidden;position:relative}.feature::before{content:"";position:absolute;inset:auto -20% -45% 10%;height:120px;background:radial-gradient(circle,rgba(30,196,255,.15),transparent 68%);pointer-events:none}.feature:hover{transform:translateY(-7px);border-color:rgba(68,207,255,.45);box-shadow:0 20px 50px rgba(0,0,0,.32),0 0 25px rgba(31,190,255,.08)}.feature-icon{font-size:36px;margin-bottom:12px}.feature h3{font-family:'Rajdhani',sans-serif;font-size:21px;font-weight:700;letter-spacing:.7px;margin-bottom:7px}.feature p{color:#9fb5cb;font-size:14px}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);margin-top:28px;gap:14px}.stat{padding:20px;border-radius:16px;background:rgba(7,20,39,.72);border:1px solid rgba(96,159,220,.14);text-align:center}.stat b{font-size:29px;display:block;color:#eff8ff}.stat span{font-size:12px;color:#8ca6be}
+.discord-section{padding-top:82px}.discord-box{padding:40px;border-radius:24px;background:radial-gradient(circle at 20% 20%,rgba(93,89,255,.15),transparent 34%),linear-gradient(135deg,rgba(15,24,58,.92),rgba(4,12,29,.95));border:1px solid rgba(124,122,255,.24);box-shadow:0 20px 70px rgba(0,0,0,.28);text-align:center}.discord-box h2{font-family:'Rajdhani',sans-serif;font-size:40px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;margin-bottom:9px}.discord-box p{color:#a9bbd2;max-width:650px;margin:0 auto 23px}.social-actions{display:flex;justify-content:center;gap:12px;flex-wrap:wrap}.btn-instagram{border:1px solid rgba(255,120,190,.5);background:linear-gradient(135deg,rgba(255,64,129,.18),rgba(125,70,255,.18));color:#fff;box-shadow:0 0 24px rgba(255,80,170,.10)}.btn-instagram:hover{border-color:rgba(255,120,190,.85);box-shadow:0 0 32px rgba(255,80,170,.18)}
+ .join-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px;max-width:1000px;margin:0 auto;align-items:stretch}.join-card{position:relative;overflow:hidden;display:flex;flex-direction:column;padding:28px;border-radius:22px;background:linear-gradient(145deg,rgba(24,19,13,.96),rgba(7,13,25,.97));border:1px solid rgba(255,181,55,.26);box-shadow:0 18px 48px rgba(0,0,0,.28);transition:transform .22s,border-color .22s,box-shadow .22s;min-width:0}.join-card:hover{transform:translateY(-4px);border-color:rgba(255,181,55,.65);box-shadow:0 22px 55px rgba(0,0,0,.36),0 0 28px rgba(255,160,35,.1)}.join-card::before{content:"";position:absolute;inset:-45% -10% auto;height:190px;background:radial-gradient(circle,rgba(255,166,38,.17),transparent 65%);pointer-events:none}.join-label{display:inline-flex;align-self:flex-start;align-items:center;gap:7px;padding:6px 11px;border-radius:999px;background:rgba(255,174,45,.1);border:1px solid rgba(255,174,45,.3);color:#ffd16a;font-size:11px;font-weight:900;letter-spacing:1.4px;text-transform:uppercase}.join-card h3{font-family:'Rajdhani',sans-serif;font-size:30px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;margin:13px 0 6px}.join-desc{color:#b6c2d0;font-size:14px;margin-bottom:17px}.join-value-row{display:flex;align-items:center;gap:10px;position:relative;z-index:1;margin-top:auto;min-width:0}.join-value{flex:1;min-width:0;padding:15px 13px;border-radius:13px;background:rgba(0,0,0,.35);border:1px solid rgba(255,190,80,.2);font-family:'Rajdhani',sans-serif;font-size:clamp(17px,2vw,23px);font-weight:700;color:#fff6e5;letter-spacing:.3px;overflow-wrap:anywhere}.join-copy{flex-shrink:0;padding:13px 14px;border:1px solid rgba(255,190,80,.45);border-radius:12px;background:linear-gradient(135deg,#ffbd45,#e98516);color:#211303;font-weight:900;cursor:pointer;transition:transform .18s,filter .18s}.join-copy:hover{transform:translateY(-2px);filter:brightness(1.08)}.join-port{font-size:13px;color:#a9b7c7;margin-top:9px}.join-port-row{display:flex;align-items:center;gap:10px;margin-top:9px;position:relative;z-index:1}.join-port-label{font-size:13px;color:#a9b7c7;white-space:nowrap}.join-port-value{flex:1;min-width:0;padding:9px 12px;border-radius:10px;background:rgba(0,0,0,.28);border:1px solid rgba(255,190,80,.18);font-family:'Rajdhani',sans-serif;font-size:18px;font-weight:700;color:#fff6e5}.join-port-row .join-copy{padding:10px 12px}.join-steps{display:grid;gap:8px;margin-top:20px;padding-top:17px;border-top:1px solid rgba(255,190,80,.14)}.join-step{display:flex;gap:10px;align-items:flex-start;color:#c0ccda;font-size:13px}.join-step b{display:grid;place-items:center;flex:0 0 22px;height:22px;border-radius:7px;background:rgba(255,174,45,.13);color:#ffd16a;font-size:12px}.join-help{text-align:center;margin-top:22px;color:#aab8c8;font-size:13px}.join-help strong{color:#ffd16a}.join-help a{color:#ffd16a;text-decoration:none}.join-help a:hover{text-decoration:underline}
+.shop-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}.shop-card{border-radius:20px;overflow:hidden;background:#071225;border:1px solid rgba(255,255,255,.08);box-shadow:0 18px 42px rgba(0,0,0,.26);transition:.22s;position:relative}.shop-card:hover{transform:translateY(-8px)}.rank-art{height:175px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;background:linear-gradient(135deg,#08111f,#0d213e)}.rank-art::after{content:"";position:absolute;inset:0;background:radial-gradient(circle at 50% 45%,rgba(255,255,255,.13),transparent 35%),linear-gradient(180deg,transparent,rgba(0,0,0,.35))}.rank-badge{width:112px;height:112px;border-radius:50%;display:grid;place-items:center;font-size:40px;font-weight:1000;position:relative;z-index:2;border:2px solid rgba(255,255,255,.55);box-shadow:0 0 35px currentColor, inset 0 0 25px rgba(255,255,255,.12)}.rank-info{padding:21px 18px 24px;text-align:center}.rank-heading-row{display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap}.rank-name{font-family:'Rajdhani',sans-serif;font-size:24px;font-weight:700;letter-spacing:1px;text-transform:uppercase}.btn-buy{display:inline-flex;align-items:center;justify-content:center;padding:7px 15px;border-radius:9px;text-decoration:none;font-family:'Rajdhani',sans-serif;font-size:15px;font-weight:900;letter-spacing:.6px;color:#fff;background:linear-gradient(135deg,#12cbff,#2a6eff);border:1px solid rgba(125,220,255,.5);box-shadow:0 6px 18px rgba(31,138,255,.2);transition:transform .18s,box-shadow .18s}.btn-buy:hover{transform:translateY(-2px);box-shadow:0 9px 24px rgba(31,138,255,.35)}.price{font-family:'Rajdhani',sans-serif;font-size:32px;font-weight:700;letter-spacing:.5px;margin:4px 0 8px}.rank-tag{display:inline-block;padding:5px 10px;border-radius:999px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.09);color:#c9d8e7;font-size:11px;font-weight:900}
+@keyframes deadliestGlow{0%,100%{filter:saturate(1) brightness(1)}50%{filter:saturate(1.18) brightness(1.08)}}
+.deadliest .rank-art{animation:deadliestGlow 2.8s ease-in-out infinite;background:radial-gradient(circle at 50% 55%,rgba(31,210,255,.34),transparent 40%),radial-gradient(circle at 50% 45%,rgba(41,124,255,.20),transparent 58%),linear-gradient(135deg,#06172b,#082c55)}.deadliest .rank-badge{color:#48ddff;border-color:#8cecff;box-shadow:0 0 38px currentColor,0 0 70px rgba(31,210,255,.25),inset 0 0 25px rgba(255,255,255,.14)}.deadliest .price{color:#45dfff;text-shadow:0 0 14px rgba(31,210,255,.45)}.deadliest .rank-tag{color:#bff6ff;border-color:rgba(72,221,255,.28);background:rgba(31,210,255,.08)}
+.vip .rank-art{background:radial-gradient(circle at 50% 55%,rgba(255,205,40,.32),transparent 40%),linear-gradient(135deg,#2b2105,#55400a)}.vip .rank-badge{color:#ffd447;border-color:#ffe58a}.vip .price{color:#ffd447}
+.mvp .rank-art{background:radial-gradient(circle at 50% 55%,rgba(49,128,255,.32),transparent 40%),linear-gradient(135deg,#06142c,#0a2855)}.mvp .rank-badge{color:#5ea2ff;border-color:#87bcff}.mvp .price{color:#4c99ff}
+.lunge .rank-art{background:radial-gradient(circle at 50% 55%,rgba(255,56,68,.30),transparent 40%),linear-gradient(135deg,#2a080c,#4a1018)}.lunge .rank-badge{color:#ff6068;border-color:#ff9da2}.lunge .price{color:#ff5c64}
+.rank-note{margin-top:28px;padding:24px;border-radius:18px;border:1px solid rgba(31,210,255,.18);background:rgba(7,19,37,.72);text-align:center}.rank-note strong{font-size:20px;display:block;margin-bottom:5px}.rank-note p{color:#9cb3c9;margin-bottom:15px}
+.rules-grid,.faq-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:17px;max-width:1000px;margin:auto}.rule,.faq{padding:24px;border-radius:17px;background:rgba(8,19,36,.82);border:1px solid rgba(90,163,220,.13)}.rule strong{color:#ffbd45;letter-spacing:.3px}.rules-thanks{margin-top:24px;border-color:rgba(255,174,45,.3);background:linear-gradient(135deg,rgba(78,42,8,.3),rgba(7,19,37,.82))}.rules-thanks strong{color:#ffd166}.rules-thanks p{margin-bottom:0;color:#ffbd45;font-weight:900}.rule p,.faq p{color:#9bb0c5;margin-top:5px}.faq h3{font-family:'Rajdhani',sans-serif;font-size:19px;font-weight:700;letter-spacing:.4px}
+.footer{padding:30px 5vw 42px;text-align:center;color:#7f95aa;border-top:1px solid rgba(255,255,255,.06);background:#02050d}.footer .server-ip{display:inline-block;margin-top:10px;padding:8px 12px;border-radius:9px;background:rgba(255,255,255,.04);color:#dcefff}
+/* Donut-inspired styling for Game Modes; keeps all mode names and server branding unchanged */
+#modes .eyebrow{color:#ffb347;text-shadow:0 0 16px rgba(255,153,38,.25)}
+#modes .section-title{background:linear-gradient(180deg,#fff4d6 0%,#ffc45e 48%,#f58220 100%);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 3px 0 #3a1908)}
+#modes .section-sub{color:#d7c2a7}
+#modes .feature{background:linear-gradient(145deg,rgba(48,27,13,.94),rgba(17,12,10,.96));border-color:rgba(255,174,67,.25);box-shadow:0 14px 35px rgba(0,0,0,.28),inset 0 1px 0 rgba(255,210,140,.05)}
+#modes .feature::before{background:radial-gradient(circle,rgba(255,156,40,.2),transparent 68%)}
+#modes .feature:hover{border-color:rgba(255,190,83,.7);box-shadow:0 20px 50px rgba(0,0,0,.35),0 0 28px rgba(255,151,40,.12)}
+#modes .feature h3{color:#ffd27a}
+#modes .feature p{color:#d2bda3}
+#modes .feature-icon{filter:drop-shadow(0 0 10px rgba(255,171,61,.18))}
+#modes .feature:first-child{border-color:rgba(255,177,64,.62);background:linear-gradient(145deg,rgba(76,39,12,.98),rgba(25,15,9,.98));box-shadow:0 15px 40px rgba(0,0,0,.3),0 0 25px rgba(255,155,40,.1)}
+#modes .feature:first-child h3{color:#ffbd4a}
+
+/* Firebase Login */
+.auth-actions{display:flex;align-items:center;gap:9px}
+.auth-btn{padding:10px 15px;border:1px solid rgba(31,210,255,.45);border-radius:10px;background:linear-gradient(135deg,rgba(12,203,255,.16),rgba(42,110,255,.18));color:#e9fbff;font-weight:900;cursor:pointer;box-shadow:0 0 18px rgba(31,190,255,.08)}
+.auth-btn:hover{border-color:rgba(90,225,255,.8);box-shadow:0 0 25px rgba(31,190,255,.2)}
+.auth-user{display:none;align-items:center;gap:8px;color:#dff8ff;font-weight:800;font-size:13px}
+.auth-user.show{display:flex}
+.auth-modal{position:fixed;inset:0;z-index:100;display:none;align-items:center;justify-content:center;padding:20px;background:rgba(0,4,12,.72);backdrop-filter:blur(12px)}
+.auth-modal.show{display:flex}
+.auth-box{width:min(420px,94vw);padding:28px;border-radius:22px;background:linear-gradient(145deg,rgba(8,25,49,.98),rgba(3,10,24,.98));border:1px solid rgba(64,211,255,.42);box-shadow:0 25px 90px rgba(0,0,0,.55),0 0 45px rgba(31,190,255,.12);position:relative}
+.auth-box h2{font-family:'Rajdhani',sans-serif;font-size:32px;text-transform:uppercase;margin-bottom:5px}
+.auth-box p{color:#9fb8d0;font-size:13px;margin-bottom:20px}
+.auth-close{position:absolute;right:14px;top:12px;border:0;background:transparent;color:#9eb8cf;font-size:24px;cursor:pointer}
+.auth-field{display:block;margin:12px 0}
+.auth-field span{display:block;font-size:12px;color:#bcd3e8;margin-bottom:6px;font-weight:800}
+.auth-field input{width:100%;padding:12px 13px;border-radius:11px;border:1px solid rgba(89,171,230,.25);background:rgba(0,0,0,.28);color:#fff;outline:none}
+.auth-field input:focus{border-color:rgba(54,213,255,.75);box-shadow:0 0 18px rgba(31,190,255,.1)}
+.auth-submit{width:100%;margin-top:8px;padding:13px;border:0;border-radius:11px;background:linear-gradient(135deg,#12cbff,#2a6eff);color:#fff;font-weight:1000;cursor:pointer}
+.auth-switch{margin-top:14px;text-align:center;color:#91a9bf;font-size:12px}
+.auth-switch button{border:0;background:none;color:#4fe0ff;font-weight:900;cursor:pointer}
+.auth-msg{min-height:18px;margin-top:10px;text-align:center;font-size:12px;color:#ff9b9b}
+.auth-divider{display:flex;align-items:center;gap:9px;margin:13px 0;color:#718aa2;font-size:11px}
+.auth-divider::before,.auth-divider::after{content:"";height:1px;flex:1;background:rgba(255,255,255,.09)}
+.auth-username{display:block}
+.auth-user-name{color:#dff8ff;font-weight:900}
+.auth-avatar{width:30px;height:30px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(135deg,#12cbff,#2a6eff);font-size:14px}
+.auth-success{color:#65f0b0!important}
+
+
+@media(max-width:980px){.nav ul{gap:15px}.feature-grid,.shop-grid{grid-template-columns:repeat(2,1fr)}}
+
+.player-only{display:flex;justify-content:center;width:min(360px,90vw);padding:12px 18px;margin-top:22px}.player-only .server-cell{border-right:0;text-align:center;padding:6px 12px;width:100%}.player-count-line{font-size:16px;font-weight:900;color:#dff6ff;letter-spacing:.2px}.player-count-line #player-count{font-size:20px;color:#22d3ee;text-shadow:0 0 14px rgba(34,211,238,.45)}
+.team-role-create{display:flex;gap:7px;margin-top:12px}.team-role-create input{flex:1;min-width:0;padding:8px 10px;border-radius:9px;border:1px solid rgba(120,180,255,.22);background:#091525;color:#fff}.team-role-create button{border:1px solid rgba(34,227,138,.28);background:rgba(34,227,138,.08);color:#a8f5c5;border-radius:9px;padding:8px 10px;font-weight:900;cursor:pointer}.team-role-list{margin-top:9px;display:grid;gap:6px}.team-role-item{display:flex;justify-content:space-between;gap:8px;padding:7px 9px;border-radius:8px;background:rgba(255,255,255,.035);color:#e8f3ff}.team-role-item small{opacity:.65}.team-role-empty{font-size:11px;opacity:.65;padding:5px}.team-perm-row select{padding:7px 9px;border-radius:8px;background:#091525;color:#fff;border:1px solid rgba(120,180,255,.22)}
+@media(max-width:760px){.join-grid{grid-template-columns:1fr}.join-card{padding:22px}.join-card h3{font-size:27px}.join-value-row{align-items:stretch}.join-copy{padding:11px 12px}.nav{height:68px}.nav-social{display:none}.nav-inner{width:94vw}.nav ul{display:none}.hero{padding-top:90px}.hero h1{letter-spacing:-2px}.server-card{grid-template-columns:1fr;gap:0;padding:11px 14px}.server-cell{border-right:0;border-bottom:1px solid rgba(255,255,255,.08);padding:10px}.server-cell:last-child{border-bottom:0}.feature-grid,.shop-grid,.rules-grid,.faq-grid,.stats{grid-template-columns:1fr}.section{padding:82px 5vw}.discord-box{padding:30px 20px}}
+
+/* Compact Login + three-dot navigation group */
+.auth-menu-group{
+  display:flex;
+  align-items:center;
+  gap:6px;
+  margin-left:4px;
+}
+.auth-menu-group .nav-menu-wrap{
+  margin-left:0 !important;
+}
+.auth-menu-group #loginBtn{
+  margin-right:0 !important;
+}
+@media (max-width: 700px){
+  .auth-menu-group{gap:5px;margin-left:4px;}
+}
+
+
+/* ===================== LUNGE MC CHAT + TEAM CHAT ===================== */
+.chat-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:22px;max-width:1100px;margin:0 auto}.chat-panel{padding:22px;border-radius:20px;background:linear-gradient(145deg,rgba(7,20,39,.94),rgba(3,10,24,.97));border:1px solid rgba(65,207,255,.18);box-shadow:0 18px 50px rgba(0,0,0,.25)}.chat-panel h3{font-family:'Rajdhani',sans-serif;font-size:24px;margin-bottom:5px}.chat-sub{color:#8fa8c0;font-size:12px;margin-bottom:14px}.chat-login-lock{padding:28px 14px;text-align:center;border:1px dashed rgba(68,207,255,.2);border-radius:14px;color:#91a9bf}.chat-login-lock button,.chat-send{border:0;border-radius:10px;padding:10px 14px;background:linear-gradient(135deg,#12cbff,#2a6eff);color:#fff;font-weight:900;cursor:pointer}.chat-messages{height:330px;overflow:auto;display:grid;gap:9px;align-content:start;padding:5px}.chat-msg{padding:10px 12px;border-radius:12px;background:rgba(255,255,255,.035);border:1px solid rgba(120,170,210,.1)}.chat-msg b{color:#4fe0ff}.chat-msg small{float:right;color:#647d95;font-size:10px}.chat-msg p{margin-top:4px;color:#d7e5f1;overflow-wrap:anywhere}.chat-compose{display:flex;gap:8px;margin-top:10px}.chat-compose input{flex:1;min-width:0;padding:11px 12px;border-radius:10px;border:1px solid rgba(89,171,230,.25);background:rgba(0,0,0,.28);color:#fff;outline:none}.chat-status{min-height:18px;margin-top:7px;color:#ff9b9b;font-size:11px}.chat-status.success{color:#69e7a0}.team-tools{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}.team-tools button{border:1px solid rgba(255,190,83,.35);background:rgba(255,157,44,.09);color:#ffd18a;border-radius:9px;padding:8px 10px;font-weight:900;cursor:pointer}.team-chat-box{margin-top:12px;padding:12px;border-radius:13px;background:rgba(0,0,0,.18);border:1px solid rgba(255,177,70,.12)}.team-chat-list{height:180px;overflow:auto;display:grid;gap:7px;align-content:start}.team-chat-msg{padding:7px 9px;border-radius:9px;background:rgba(255,255,255,.035);font-size:12px}.team-chat-msg b{color:#ffd18a}.team-invite{display:flex;gap:7px;margin-top:8px}.team-invite input{flex:1;min-width:0;padding:9px;border-radius:9px;border:1px solid rgba(255,177,70,.18);background:rgba(0,0,0,.25);color:#fff}.team-invite button{border:0;border-radius:9px;background:#e98a27;color:#211303;font-weight:900;padding:9px 11px;cursor:pointer}@media(max-width:760px){.chat-grid{grid-template-columns:1fr}.chat-compose{flex-direction:column}.chat-send{width:100%}}
+.team-invites-list{margin-top:12px;display:grid;gap:10px}.team-invite-item{padding:12px;border-radius:12px;background:rgba(8,22,42,.78);border:1px solid rgba(31,210,255,.18);color:#dcefff}.team-invite-item button{padding:7px 10px;border-radius:8px;border:1px solid rgba(31,210,255,.3);background:rgba(31,210,255,.1);color:#fff;cursor:pointer}.team-invite-item small{color:#9fb6ca}.team-invite-item b{color:#7ee8ff}
+
+.team-toolbar{display:flex;gap:8px;align-items:center;margin:12px 0 10px}.team-search{flex:1;min-width:0;padding:10px 12px;border-radius:10px;border:1px solid rgba(89,171,230,.22);background:rgba(0,0,0,.24);color:#fff;outline:none}.team-count-pill{padding:8px 10px;border-radius:999px;background:rgba(31,210,255,.08);border:1px solid rgba(31,210,255,.18);color:#8feaff;font-size:11px;font-weight:900}.team-members-panel{display:none;margin-top:10px;padding:10px;border-radius:12px;background:rgba(0,0,0,.18);border:1px solid rgba(255,190,83,.12)}.team-members-panel.open{display:grid;gap:7px}.team-member-row{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:8px 10px;border-radius:9px;background:rgba(255,255,255,.035)}.team-member-name{display:flex;align-items:center;gap:7px;min-width:0;overflow-wrap:anywhere}.team-owner-badge,.team-role-badge{font-size:9px;padding:3px 6px;border-radius:999px;white-space:nowrap;background:rgba(255,190,83,.1);color:#ffd18a}.team-role-badge{background:rgba(31,210,255,.08);color:#8feaff}.team-kick-btn{border:1px solid rgba(255,85,85,.3)!important;background:rgba(255,60,60,.08)!important;color:#ff9c9c!important}.team-perm-panel{display:none;margin-top:10px;padding:12px;border-radius:12px;background:rgba(0,0,0,.2);border:1px solid rgba(31,210,255,.14)}.team-perm-panel.open{display:block}.team-perm-title{font-weight:900;margin-bottom:8px;color:#8feaff}.team-perm-panel select{width:100%;padding:9px;border-radius:9px;background:#091525;color:#fff;border:1px solid rgba(89,171,230,.22)}.team-perm-row{display:flex;justify-content:space-between;gap:10px;padding:7px 0;color:#d7e5f1;font-size:12px}.team-perm-save{margin-top:8px;border:0;border-radius:9px;padding:9px 12px;background:linear-gradient(135deg,#12cbff,#2a6eff);color:#fff;font-weight:900;cursor:pointer}.chat-compose input{transition:border-color .15s}.chat-compose input:focus,.team-search:focus{border-color:rgba(31,210,255,.6)} .chat-compose{position:relative}.chat-attach-btn{border:1px solid rgba(31,210,255,.25);background:rgba(31,210,255,.08);color:#8feaff;border-radius:10px;padding:10px 12px;font-weight:900;cursor:pointer}.chat-image-preview{display:none;align-items:center;gap:8px;margin-top:8px;padding:7px 9px;border-radius:10px;background:rgba(31,210,255,.06);border:1px solid rgba(31,210,255,.12)}.chat-image-preview.show{display:flex}.chat-image-preview img{width:44px;height:44px;object-fit:cover;border-radius:8px}.chat-image-preview button{margin-left:auto;border:0;background:none;color:#ff9b9b;cursor:pointer}.chat-msg-image{display:block;max-width:220px;max-height:220px;border-radius:10px;margin-top:7px;object-fit:cover}.chat-mention{color:#72e7ff;font-weight:900}.team-logo-input{display:flex;align-items:center;gap:10px;padding:10px;border:1px dashed rgba(255,177,70,.25);border-radius:11px;background:rgba(0,0,0,.18)}.team-logo-preview{width:48px;height:48px;border-radius:12px;object-fit:cover;display:none;border:1px solid rgba(255,190,83,.3)}.team-logo-preview.show{display:block}.team-logo-placeholder{width:48px;height:48px;border-radius:12px;display:grid;place-items:center;background:rgba(255,177,70,.08);font-size:22px}.team-logo-card{width:42px;height:42px;border-radius:11px;object-fit:cover;vertical-align:middle;margin-right:8px;border:1px solid rgba(255,190,83,.25)}.team-mention-list{position:absolute;left:0;right:0;bottom:52px;z-index:5;display:none;max-height:170px;overflow:auto;background:#071321;border:1px solid rgba(31,210,255,.2);border-radius:10px;padding:5px}.team-mention-list.show{display:block}.team-mention-item{padding:7px 9px;border-radius:7px;cursor:pointer}.team-mention-item:hover{background:rgba(31,210,255,.1)}
+@media(max-width:760px){.team-toolbar{align-items:stretch}.team-toolbar .team-count-pill{display:none}.team-tools button{flex:1;min-width:120px}.team-member-row{align-items:flex-start}.team-kick-btn{flex:0 0 auto}}
+</style>
+
+<style>
+/* Account creation visibility fix */
+.auth-switch {
+  margin-top: 18px !important;
+  padding-top: 14px !important;
+  border-top: 1px solid rgba(255,255,255,.12) !important;
+  text-align: center !important;
+}
+.auth-switch button {
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  margin-left: 6px;
+  padding: 8px 14px !important;
+  border-radius: 9px !important;
+  font-weight: 800 !important;
+  cursor: pointer !important;
+}
+.account-create-note {
+  display: block !important;
+  margin: 8px 0 0 !important;
+  text-align: center !important;
+  font-size: 12px !important;
+  opacity: .75 !important;
+}
+</style>
+
+
+<style>
+.lunge-welcome {
+  position: fixed;
+  top: 82px;
+  right: 18px;
+  z-index: 99999;
+  min-width: 280px;
+  max-width: calc(100vw - 36px);
+  padding: 15px 18px;
+  border-radius: 14px;
+  background: rgba(20, 20, 28, .96);
+  border: 1px solid rgba(255,255,255,.14);
+  box-shadow: 0 12px 35px rgba(0,0,0,.35);
+  color: #fff;
+  transform: translateY(-18px);
+  opacity: 0;
+  pointer-events: none;
+  transition: .25s ease;
+}
+.lunge-welcome.show {
+  transform: translateY(0);
+  opacity: 1;
+}
+.lunge-welcome strong {
+  display: block;
+  font-size: 16px;
+  margin-bottom: 4px;
+}
+.lunge-welcome span {
+  font-size: 13px;
+  opacity: .78;
+}
+</style>
+
+
+<style>
+/* Final navigation layout: Login, then three-dot menu with all page links inside */
+.nav .nav-inner{gap:18px}
+.nav .nav-social{margin-left:auto}
+.nav .auth-actions{display:flex;align-items:center;gap:8px;position:relative}
+
+.nav-menu-wrap{position:relative;display:flex;align-items:center}
+.nav .nav-menu-toggle{
+  display:grid;
+  place-items:center;
+  width:42px;
+  height:42px;
+  margin:0;
+  padding:0;
+  border:1px solid rgba(31,210,255,.45);
+  border-radius:10px;
+  background:rgba(5,20,39,.72);
+  color:#dff9ff;
+  font-size:25px;
+  line-height:1;
+  cursor:pointer;
+  box-shadow:0 0 16px rgba(31,210,255,.08);
+  transition:.2s ease;
+  transform:none;
+}
+.nav .nav-menu-toggle:hover,.nav .nav-menu-toggle.open{
+  border-color:rgba(90,225,255,.85);
+  background:rgba(12,44,72,.9);
+  box-shadow:0 0 22px rgba(31,210,255,.2);
+  transform:none;
+}
+.nav-menu-dropdown{
+  position:absolute;
+  top:calc(100% + 10px);
+  right:0;
+  width:220px;
+  display:flex;
+  flex-direction:column;
+  gap:4px;
+  padding:9px;
+  border:1px solid rgba(31,210,255,.25);
+  border-radius:14px;
+  background:rgba(2,9,20,.98);
+  box-shadow:0 18px 45px rgba(0,0,0,.45),0 0 25px rgba(31,190,255,.08);
+  backdrop-filter:blur(16px);
+  opacity:0;
+  visibility:hidden;
+  transform:translateY(-8px);
+  pointer-events:none;
+  transition:.2s ease;
+  z-index:1000;
+}
+.nav-menu-dropdown.menu-open{
+  opacity:1;
+  visibility:visible;
+  transform:translateY(0);
+  pointer-events:auto;
+}
+.nav-menu-dropdown a{
+  display:block;
+  width:100%;
+  padding:10px 12px;
+  border-radius:9px;
+  color:#cfe3f4;
+  font-family:'Rajdhani',sans-serif;
+  font-weight:700;
+  font-size:15px;
+  text-decoration:none;
+}
+.nav-menu-dropdown a:hover{background:rgba(31,210,255,.08);color:#fff}
+@media(max-width:760px){
+  .nav .nav-social{display:none}
+  .nav .nav-inner{width:94vw}
+  .nav-menu-dropdown{right:0;width:min(230px,70vw)}
+  .nav .auth-actions{gap:6px}
+  .nav .auth-btn{padding:9px 12px}
+}
+</style>
+
+
+
+
+<style id="warm-ui-polish-style">
+.nav{
+  background:linear-gradient(180deg,rgba(10,7,4,.97),rgba(18,10,5,.94)) !important;
+}
+.auth-btn,.nav-menu-toggle{
+  border-color:rgba(255,177,70,.38);
+}
+.nav-menu-toggle:hover{
+  background:rgba(255,177,70,.12);
+}
+.logo span{
+  text-shadow:0 0 18px rgba(255,151,45,.18);
+}
+</style>
+
+<style id="nav-menu-emoji-animation-style">
+/* Warm brown/golden mobile menu inspired by the screenshot */
+.nav-menu-wrap{position:relative}
+.nav-menu-toggle{
+  position:relative;
+  overflow:hidden;
+  transition:transform .28s cubic-bezier(.2,.8,.2,1),box-shadow .28s ease,background .28s ease;
+}
+.nav-menu-toggle::after{
+  content:"";
+  position:absolute;
+  inset:18%;
+  border-radius:50%;
+  background:radial-gradient(circle,rgba(255,177,70,.26),transparent 68%);
+  transform:scale(.65);
+  opacity:.35;
+  animation:navDotGlow 2.2s ease-in-out infinite;
+  pointer-events:none;
+}
+.nav-menu-toggle.open{
+  transform:rotate(90deg) scale(1.05);
+  box-shadow:0 0 26px rgba(255,177,70,.22);
+}
+.nav-menu-dropdown{
+  background:
+    linear-gradient(145deg,rgba(42,22,9,.98),rgba(18,9,4,.985)) !important;
+  border:1px solid rgba(255,177,70,.34) !important;
+  box-shadow:
+    0 25px 65px rgba(0,0,0,.55),
+    0 0 30px rgba(255,142,38,.12),
+    inset 0 1px 0 rgba(255,205,120,.07);
+  backdrop-filter:blur(14px);
+  -webkit-backdrop-filter:blur(14px);
+  transform-origin:top right;
+}
+.nav-menu-dropdown.menu-open{
+  animation:menuDropIn .34s cubic-bezier(.2,.85,.25,1) both;
+}
+.nav-menu-item{
+  display:flex !important;
+  align-items:center;
+  gap:12px;
+  min-height:48px;
+  border-radius:12px;
+  color:#f3d7b0 !important;
+  background:linear-gradient(90deg,rgba(255,177,70,.025),rgba(255,177,70,.06));
+  transition:
+    transform .22s ease,
+    background .22s ease,
+    color .22s ease,
+    box-shadow .22s ease;
+}
+.nav-menu-item:hover{
+  transform:translateX(7px) scale(1.015);
+  color:#fff2d9 !important;
+  background:linear-gradient(90deg,rgba(255,177,70,.13),rgba(255,110,30,.08));
+  box-shadow:0 7px 20px rgba(0,0,0,.18),inset 3px 0 0 rgba(255,177,70,.72);
+}
+.nav-menu-emoji{
+  width:30px;
+  min-width:30px;
+  display:inline-flex;
+  justify-content:center;
+  align-items:center;
+  font-size:21px;
+  filter:drop-shadow(0 0 7px rgba(255,177,70,.18));
+  transform-origin:center;
+}
+.nav-menu-item:hover .nav-menu-emoji{
+  animation:emojiBounce .55s ease both;
+}
+.nav-menu-dropdown.menu-open .nav-menu-item{
+  animation:menuItemIn .42s cubic-bezier(.2,.8,.2,1) both;
+}
+.nav-menu-dropdown.menu-open .nav-menu-item:nth-child(1){animation-delay:.025s}
+.nav-menu-dropdown.menu-open .nav-menu-item:nth-child(2){animation-delay:.055s}
+.nav-menu-dropdown.menu-open .nav-menu-item:nth-child(3){animation-delay:.085s}
+.nav-menu-dropdown.menu-open .nav-menu-item:nth-child(4){animation-delay:.115s}
+.nav-menu-dropdown.menu-open .nav-menu-item:nth-child(5){animation-delay:.145s}
+.nav-menu-dropdown.menu-open .nav-menu-item:nth-child(6){animation-delay:.175s}
+.nav-menu-dropdown.menu-open .nav-menu-item:nth-child(7){animation-delay:.205s}
+.nav-menu-dropdown.menu-open .nav-menu-item:nth-child(8){animation-delay:.235s}
+.nav-menu-dropdown.menu-open .nav-menu-item:nth-child(9){animation-delay:.265s}
+.nav-menu-dropdown.menu-open .nav-menu-item:nth-child(10){animation-delay:.295s}
+.nav-menu-dropdown.menu-open .nav-menu-item:nth-child(11){animation-delay:.325s}
+.nav-menu-dropdown.menu-open .nav-menu-item:nth-child(12){animation-delay:.355s}
+.sound-menu-btn.nav-menu-item{
+  width:100%;
+  padding:10px 12px !important;
+  text-align:left;
+  font-family:inherit;
+  font-size:inherit;
+}
+@keyframes menuDropIn{
+  0%{opacity:0;transform:translateY(-12px) scale(.96);filter:blur(3px)}
+  65%{opacity:1;transform:translateY(2px) scale(1.01);filter:blur(0)}
+  100%{opacity:1;transform:translateY(0) scale(1)}
+}
+@keyframes menuItemIn{
+  from{opacity:0;transform:translateX(-14px) scale(.97)}
+  to{opacity:1;transform:translateX(0) scale(1)}
+}
+@keyframes emojiBounce{
+  0%{transform:scale(1) rotate(0)}
+  45%{transform:scale(1.25) rotate(-8deg)}
+  75%{transform:scale(.94) rotate(6deg)}
+  100%{transform:scale(1) rotate(0)}
+}
+@keyframes navDotGlow{
+  0%,100%{opacity:.25;transform:scale(.65)}
+  50%{opacity:.7;transform:scale(1)}
+}
+@media(max-width:760px){
+  .nav-menu-item{min-height:52px;padding:10px 13px !important}
+  .nav-menu-emoji{font-size:22px;width:31px;min-width:31px}
+}
+@media(prefers-reduced-motion:reduce){
+  .nav-menu-toggle,.nav-menu-toggle::after,.nav-menu-dropdown.menu-open,.nav-menu-dropdown.menu-open .nav-menu-item,.nav-menu-item:hover .nav-menu-emoji{
+    animation:none!important;
+    transition:none!important;
+  }
+}
+</style>
+
+<style id="site-sound-style">
+.sound-toggle-btn,.sound-menu-btn{
+  border:1px solid rgba(255,190,83,.42)!important;
+  background:rgba(255,157,44,.10)!important;
+  color:#ffd18a!important;
+  font-weight:900;
+  cursor:pointer;
+}
+.sound-toggle-btn.sound-off,.sound-menu-btn.sound-off{
+  opacity:.78;
+  filter:saturate(.65);
+}
+.sound-menu-btn{
+  width:100%;
+  padding:10px 12px;
+  border-radius:9px;
+  text-align:left;
+  font-family:'Rajdhani',sans-serif;
+  font-size:15px;
+}
+.sound-toggle-btn:hover,.sound-menu-btn:hover{
+  background:rgba(255,157,44,.18)!important;
+  box-shadow:0 0 16px rgba(255,140,31,.12);
+}
+@media(max-width:760px){
+  .sound-toggle-btn{padding:9px 10px!important;font-size:12px}
+}
+.team-delete-btn{
+  border-color:rgba(255,92,82,.45)!important;
+  background:rgba(255,92,82,.10)!important;
+  color:#ffaaa4!important;
+}
+.team-delete-btn:hover{
+  background:rgba(255,92,82,.18)!important;
+}
+</style>
+
+<style>
+/* LUNGE MC — warm Minecraft SMP theme inspired by modern orange/brown SMP landing pages */
+:root{--bg:#0b0704;--bg2:#17100a;--panel:rgba(35,20,10,.82);--line:rgba(255,177,69,.25);--text:#fff8ed;--muted:#cdbda9;--cyan:#ffb347;--blue:#ff7a1a;--green:#63e58d;--purple:#c887ff;--red:#ff5c52}
+body{background:radial-gradient(circle at 50% -10%,#5a2a0b 0,#211107 30%,#080503 78%);color:var(--text)}
+body::before{opacity:.12;background-image:linear-gradient(rgba(255,196,112,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(255,196,112,.045) 1px,transparent 1px);background-size:64px 64px}
+.nav{background:rgba(12,7,3,.82);border-bottom:1px solid rgba(255,178,72,.18);box-shadow:0 8px 30px rgba(0,0,0,.3);backdrop-filter:blur(16px)}
+.logo{text-shadow:0 3px 0 #241006,0 0 22px rgba(255,142,35,.18)}.logo span{color:#ffad3d;text-shadow:0 0 18px rgba(255,151,48,.55)}
+.nav a:hover{color:#fff2d6;text-shadow:0 0 14px rgba(255,166,61,.45)}
+.nav-discord{border-color:rgba(255,174,69,.42);background:rgba(55,25,7,.58);box-shadow:0 0 22px rgba(255,137,28,.08)}
+.hero{background:radial-gradient(circle at 50% 24%,rgba(255,145,35,.30),transparent 28%),radial-gradient(circle at 15% 45%,rgba(151,70,13,.22),transparent 26%),radial-gradient(circle at 85% 44%,rgba(255,190,84,.13),transparent 24%),linear-gradient(180deg,#090502 0,#241106 54%,#080402 100%)}
+.hero::before{background:linear-gradient(180deg,transparent 0 52%,rgba(24,9,2,.12) 52% 100%),radial-gradient(circle at 50% 90%,rgba(255,139,35,.20),transparent 34%)}
+.stars{opacity:.18}
+.hero-pill{border-color:rgba(255,184,76,.6);background:linear-gradient(135deg,rgba(91,39,7,.9),rgba(43,18,7,.92));color:#ffe4b2;box-shadow:0 0 24px rgba(255,142,36,.18),inset 0 0 14px rgba(255,190,75,.07)}
+.hero h1{background:linear-gradient(180deg,#fffdf8 0%,#ffe7bd 35%,#ffb84d 68%,#e86b18 100%);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 6px 0 #241006) drop-shadow(0 0 26px rgba(255,132,31,.42));animation:smpTitle 3.2s ease-in-out infinite}
+.hero-sub{color:#d9c6af}
+.btn-primary{background:linear-gradient(135deg,#ffb83f,#e66d18);box-shadow:0 12px 30px rgba(255,126,24,.25)}
+.btn-secondary{background:rgba(31,14,5,.78);border-color:rgba(255,178,72,.42);color:#ffe8c5}
+.server-card{background:rgba(22,10,4,.78);border-color:rgba(255,174,66,.30);box-shadow:0 20px 55px rgba(0,0,0,.42),0 0 36px rgba(255,142,31,.08)}
+.online{color:#63e58d}.player-count-line #player-count{color:#ffb347;text-shadow:0 0 14px rgba(255,160,50,.45)}
+.section{background:linear-gradient(180deg,#080402,#160b05)}.section.alt{background:linear-gradient(180deg,#160b05,#090503)}
+.eyebrow{color:#ffb347;text-shadow:0 0 16px rgba(255,153,38,.25)}
+.section-title{background:linear-gradient(180deg,#fff7e8 0%,#ffd080 46%,#ed741d 100%);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 3px 0 #351507)}
+.section-sub{color:#cdbba6}
+.feature{background:linear-gradient(145deg,rgba(48,27,13,.94),rgba(17,9,5,.96));border-color:rgba(255,174,67,.24);box-shadow:0 14px 35px rgba(0,0,0,.32),inset 0 1px 0 rgba(255,210,140,.05);animation:cardFloat 6s ease-in-out infinite}
+.feature:nth-child(2){animation-delay:.35s}.feature:nth-child(3){animation-delay:.7s}.feature:nth-child(4){animation-delay:1.05s}
+.feature::before{background:radial-gradient(circle,rgba(255,156,40,.18),transparent 68%)}
+.feature:hover{border-color:rgba(255,190,83,.72);box-shadow:0 20px 50px rgba(0,0,0,.4),0 0 28px rgba(255,151,40,.14)}
+.feature h3{color:#ffd27a}.feature p{color:#d2bda3}.feature-icon{filter:drop-shadow(0 0 10px rgba(255,171,61,.2))}
+.stat,.rule,.faq{background:rgba(29,15,7,.78);border-color:rgba(255,177,70,.14)}
+.stat b{color:#fff3df}.stat span{color:#bda990}
+.discord-box{background:radial-gradient(circle at 20% 20%,rgba(255,151,48,.15),transparent 34%),linear-gradient(135deg,rgba(46,23,10,.94),rgba(10,5,3,.97));border-color:rgba(255,169,61,.24);box-shadow:0 20px 70px rgba(0,0,0,.38)}
+.btn-instagram{border-color:rgba(255,145,88,.48);background:linear-gradient(135deg,rgba(255,111,51,.16),rgba(171,72,255,.13))}
+.shop-card{background:#130a05;border-color:rgba(255,177,70,.13);box-shadow:0 18px 42px rgba(0,0,0,.4)}
+.shop-card:hover{transform:translateY(-9px) scale(1.012);border-color:rgba(255,190,83,.48);box-shadow:0 24px 58px rgba(0,0,0,.45),0 0 28px rgba(255,151,40,.09)}
+.rank-art{background:linear-gradient(135deg,#211006,#4a2108)}
+.btn-buy{background:linear-gradient(135deg,#ffb83f,#e66d18);border-color:rgba(255,211,126,.5);box-shadow:0 6px 18px rgba(255,128,24,.2)}
+.rank-note{border-color:rgba(255,174,61,.20);background:rgba(29,14,6,.72)}
+.rules-thanks{border-color:rgba(255,174,45,.3);background:linear-gradient(135deg,rgba(78,42,8,.3),rgba(15,8,4,.82))}
+.footer{background:#060302;border-top-color:rgba(255,177,70,.09);color:#9c8975}.footer .server-ip{background:rgba(255,255,255,.035);color:#ffe4bf}
+.auth-btn{border-color:rgba(255,174,69,.42);background:linear-gradient(135deg,rgba(255,157,44,.16),rgba(208,80,19,.16));box-shadow:0 0 18px rgba(255,139,31,.08)}
+.auth-box{background:linear-gradient(145deg,rgba(38,18,7,.98),rgba(10,5,3,.99));border-color:rgba(255,174,64,.42);box-shadow:0 25px 90px rgba(0,0,0,.6),0 0 45px rgba(255,139,31,.12)}
+.auth-submit{background:linear-gradient(135deg,#ffb83f,#e66d18)}
+.auth-avatar{background:linear-gradient(135deg,#ffb83f,#e66d18)}
+.auth-switch button{color:#ffbd57}
+@keyframes smpTitle{0%,100%{transform:translateY(0);filter:drop-shadow(0 6px 0 #241006) drop-shadow(0 0 24px rgba(255,132,31,.42))}50%{transform:translateY(-5px);filter:drop-shadow(0 8px 0 #241006) drop-shadow(0 0 34px rgba(255,151,40,.58))}}
+@keyframes cardFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+@keyframes glowPulse{0%,100%{box-shadow:0 0 0 rgba(255,151,40,0)}50%{box-shadow:0 0 28px rgba(255,151,40,.12)}}
+.btn,.nav-discord,.auth-btn,.nav-menu-toggle{transition:transform .18s ease,box-shadow .22s ease,border-color .22s ease,filter .22s ease}
+.btn:hover,.nav-discord:hover,.auth-btn:hover{filter:brightness(1.08);transform:translateY(-3px)}
+.nav-menu-dropdown{background:rgba(24,11,4,.97)!important;border-color:rgba(255,174,64,.24)!important;box-shadow:0 22px 50px rgba(0,0,0,.55),0 0 25px rgba(255,140,31,.08)!important}
+.nav-menu-dropdown a:hover{background:rgba(255,157,44,.10)!important;color:#ffd18a!important}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+</style>
+
+
+<style>
+/* LUNGE MC WELCOME THEME */
+.welcome-section{
+  position:relative;
+  overflow:hidden;
+  min-height:58vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  isolation:isolate;
+}
+.welcome-section::before,
+.welcome-section::after{
+  content:"";
+  position:absolute;
+  width:280px;
+  height:280px;
+  border-radius:50%;
+  background:radial-gradient(circle, rgba(255,174,66,.24), transparent 68%);
+  filter:blur(4px);
+  z-index:-1;
+  animation:welcomeFloat 7s ease-in-out infinite;
+}
+.welcome-section::before{left:-80px;top:5%;animation-delay:-2s}
+.welcome-section::after{right:-80px;bottom:0;animation-delay:-4s}
+.welcome-content{max-width:850px;padding:48px 22px;animation:welcomeIn .9s ease both}
+.welcome-title{
+  margin:.25em 0 .2em;
+  text-shadow:0 0 12px rgba(255,174,66,.35),0 0 35px rgba(255,112,24,.18);
+  animation:welcomeGlow 3s ease-in-out infinite;
+}
+.welcome-text{max-width:680px;margin:0 auto 28px;line-height:1.7;opacity:.9}
+.welcome-actions{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+.welcome-actions .btn{transition:transform .2s ease,box-shadow .2s ease}
+.welcome-actions .btn:hover{transform:translateY(-4px) scale(1.02);box-shadow:0 10px 30px rgba(255,139,35,.22)}
+@keyframes welcomeIn{
+  from{opacity:0;transform:translateY(28px) scale(.98)}
+  to{opacity:1;transform:translateY(0) scale(1)}
+}
+@keyframes welcomeFloat{
+  0%,100%{transform:translate(0,0) scale(1)}
+  50%{transform:translate(22px,-18px) scale(1.08)}
+}
+@keyframes welcomeGlow{
+  0%,100%{filter:brightness(1)}
+  50%{filter:brightness(1.12)}
+}
+@media (prefers-reduced-motion:reduce){
+  .welcome-content,.welcome-section::before,.welcome-section::after,.welcome-title{animation:none!important}
+}
+</style>
+
+
+<style id="brand-home-link-style">
+.brand-home-link { cursor:pointer; text-decoration:none; }
+</style>
+
+<style id="teams-style">
+.teams-section{background:linear-gradient(180deg,#0d0602,#1a0c05)}
+.teams-grid{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1.4fr);gap:22px;max-width:1050px;margin:0 auto}
+.team-panel{padding:26px;border-radius:20px;background:linear-gradient(145deg,rgba(48,25,10,.96),rgba(15,7,3,.98));border:1px solid rgba(255,177,70,.22);box-shadow:0 18px 45px rgba(0,0,0,.3)}
+.team-panel h3{font-family:'Rajdhani',sans-serif;font-size:27px;text-transform:uppercase;margin-bottom:7px;color:#ffd27a}
+.team-panel p{color:#bfae9c;font-size:13px;margin-bottom:16px}
+.team-form{display:grid;gap:10px}
+.team-form input{width:100%;padding:12px 13px;border-radius:11px;border:1px solid rgba(255,177,70,.2);background:rgba(0,0,0,.28);color:#fff;outline:none}
+.team-form input:focus{border-color:rgba(255,190,83,.75);box-shadow:0 0 18px rgba(255,151,40,.1)}
+.team-submit{padding:12px 15px;border:0;border-radius:11px;background:linear-gradient(135deg,#ffb83f,#e66d18);color:#211303;font-weight:1000;cursor:pointer}
+.team-list{display:grid;gap:10px;max-height:430px;overflow:auto;padding-right:2px}
+.team-card{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px;border-radius:14px;background:rgba(0,0,0,.22);border:1px solid rgba(255,177,70,.14)}
+.team-card-main{min-width:0}.team-name{font-family:'Rajdhani',sans-serif;font-size:20px;font-weight:800;color:#fff1d8}.team-meta{font-size:12px;color:#a99886;margin-top:2px;overflow-wrap:anywhere}
+.team-join{flex-shrink:0;padding:9px 12px;border:1px solid rgba(255,190,83,.42);border-radius:9px;background:rgba(255,157,44,.12);color:#ffd18a;font-weight:900;cursor:pointer}.team-join:disabled{opacity:.5;cursor:not-allowed}
+.team-status{min-height:20px;margin-top:12px;font-size:12px;color:#ffad9f}.team-status.success{color:#69e7a0}.team-empty{text-align:center;padding:28px 10px;color:#8f7e6d;border:1px dashed rgba(255,177,70,.14);border-radius:14px}
+.my-teams{display:grid;gap:8px;margin-top:16px}.my-team-chip{padding:10px 12px;border-radius:10px;background:rgba(255,174,64,.08);border:1px solid rgba(255,174,64,.14);color:#f6d8ad;font-size:13px}
+.team-lock{margin-top:14px;padding:12px;border-radius:11px;background:rgba(255,174,64,.07);border:1px solid rgba(255,174,64,.14);color:#cdbba6;font-size:12px}
+.team-lock button{border:0;background:none;color:#ffd06b;font-weight:900;cursor:pointer}
+@media(max-width:760px){.teams-grid{grid-template-columns:1fr}.team-panel{padding:21px}.team-card{align-items:flex-start;flex-direction:column}.team-join{width:100%}}
+</style>
+
+
+<style id="player-skin-chat-style">
+.skin-panel{margin-top:18px;padding:18px;border-radius:16px;background:rgba(0,0,0,.22);border:1px solid rgba(255,177,70,.14)}
+.skin-panel h3{margin:0 0 6px;color:#ffd27a}.skin-sub{font-size:12px;color:#a99886;margin-bottom:12px}
+.skin-tools{display:grid;grid-template-columns:1fr auto;gap:9px}.skin-tools input{width:100%;padding:11px 12px;border-radius:10px;border:1px solid rgba(255,177,70,.2);background:rgba(0,0,0,.28);color:#fff}
+.skin-preview{display:flex;align-items:center;gap:12px;margin-top:12px;padding:10px;border-radius:12px;background:rgba(255,174,64,.06)}
+.skin-avatar{width:52px;height:52px;border-radius:9px;image-rendering:auto;object-fit:cover;background:#111;border:1px solid rgba(255,190,83,.25)}
+.skin-preview .skin-avatar{width:90px;height:120px;object-fit:contain;border-radius:10px}
+.chat-msg,.team-chat-msg{display:flex;align-items:flex-start;gap:10px}.chat-avatar{width:38px;height:38px;border-radius:7px;object-fit:cover;flex:0 0 38px;background:#111;border:1px solid rgba(255,190,83,.22)}
+.chat-msg-body{min-width:0;flex:1}.chat-msg-head{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.chat-msg-head small{color:#647d95}.chat-msg-body p{margin:3px 0 0;overflow-wrap:anywhere}
+.team-chat-msg .chat-avatar{width:34px;height:34px;flex-basis:34px}.team-chat-msg .chat-msg-body{flex:1;min-width:0}
+@media(max-width:600px){.skin-tools{grid-template-columns:1fr}.skin-tools button{width:100%}}
+</style>
+<style id="final-mobile-nav-scroll-fix">
+/* Final mobile navigation + sound sizing fix */
+@media (max-width:760px){
+  html,body{
+    height:auto !important;
+    min-height:100% !important;
+    overflow-x:hidden !important;
+    overflow-y:auto !important;
+    -webkit-overflow-scrolling:touch !important;
+    touch-action:pan-y !important;
+  }
+  .nav{
+    position:fixed !important;
+  }
+  .nav-menu-toggle{
+    width:42px !important;
+    height:42px !important;
+    min-width:42px !important;
+    min-height:42px !important;
+    flex:0 0 42px !important;
+    font-size:25px !important;
+  }
+  .sound-toggle-btn{
+    padding:5px 7px !important;
+    font-size:10px !important;
+    min-height:28px !important;
+    line-height:1 !important;
+    border-radius:7px !important;
+  }
+  .nav-menu-dropdown{
+    max-height:min(70vh,calc(100vh - 82px)) !important;
+    overflow-y:scroll !important;
+    overflow-x:hidden !important;
+    -webkit-overflow-scrolling:touch !important;
+    overscroll-behavior-y:contain !important;
+    touch-action:pan-y !important;
+    pointer-events:auto !important;
+    scrollbar-width:thin;
+  }
+  .nav-menu-dropdown .nav-menu-item{
+    touch-action:pan-y !important;
+  }
+}
+</style>
+
+<style id="team-leave-style">
+.team-leave-btn{border:1px solid rgba(255,190,83,.38)!important;background:rgba(255,157,44,.08)!important;color:#ffd18a!important;border-radius:9px;padding:8px 10px;font-weight:900;cursor:pointer}
+.team-leave-btn:hover{background:rgba(255,157,44,.16)!important;box-shadow:0 0 14px rgba(255,140,31,.10)}
+.team-visibility-row{display:flex;gap:9px;flex-wrap:wrap;margin-top:2px}.team-visibility-option{flex:1;min-width:130px;position:relative}.team-visibility-option input{position:absolute;opacity:0;pointer-events:none}.team-visibility-option span{display:block;padding:11px 12px;border-radius:11px;border:1px solid rgba(255,177,70,.20);background:rgba(0,0,0,.20);color:#d9c3aa;font-weight:800;text-align:center;cursor:pointer;transition:.2s}.team-visibility-option input:checked+span{border-color:rgba(255,190,83,.72);background:rgba(255,157,44,.14);color:#fff0d2;box-shadow:0 0 16px rgba(255,140,31,.08)}.team-visibility-badge{display:inline-flex;align-items:center;gap:5px;margin-left:7px;padding:3px 7px;border-radius:999px;font-size:10px;font-weight:900;vertical-align:middle}.team-visibility-badge.public{color:#8ff0b0;background:rgba(34,227,138,.09);border:1px solid rgba(34,227,138,.22)}.team-visibility-badge.private{color:#ffd18a;background:rgba(255,157,44,.09);border:1px solid rgba(255,157,44,.22)}.team-kick-btn{border:1px solid rgba(255,92,82,.42)!important;background:rgba(255,92,82,.10)!important;color:#ffaaa4!important;border-radius:9px;padding:8px 10px;font-weight:900;cursor:pointer}.team-kick-btn:hover{background:rgba(255,92,82,.18)!important}.team-members-btn{border:1px solid rgba(255,177,70,.22)!important;background:rgba(255,177,70,.07)!important;color:#ffe0ae!important;border-radius:9px;padding:8px 10px;font-weight:900;cursor:pointer}.team-members-btn:hover{background:rgba(255,177,70,.13)!important}.team-members-panel{display:none;margin-top:10px;padding:10px;border:1px solid rgba(255,177,70,.16);border-radius:12px;background:rgba(0,0,0,.18)}.team-members-panel.open{display:block}.team-member-row{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:8px 0;border-bottom:1px solid rgba(255,255,255,.06)}.team-member-row:last-child{border-bottom:0}.team-member-name{font-weight:800;color:#f4eadc}.team-owner-badge{font-size:10px;color:#ffd18a;border:1px solid rgba(255,177,70,.25);border-radius:999px;padding:3px 6px;margin-left:5px}
+.team-role-badge{font-size:10px;color:#b9d8ff;border:1px solid rgba(120,180,255,.25);border-radius:999px;padding:3px 6px;margin-left:5px}.team-manage-btn{border:1px solid rgba(120,180,255,.30)!important;background:rgba(90,150,255,.08)!important;color:#cfe3ff!important;border-radius:9px;padding:8px 10px;font-weight:900;cursor:pointer}.team-perm-panel{display:none;margin-top:10px;padding:12px;border:1px solid rgba(120,180,255,.18);border-radius:12px;background:rgba(20,35,60,.18)}.team-perm-panel.open{display:block}.team-perm-title{font-weight:900;color:#fff0d2;margin-bottom:9px}.team-perm-row{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:8px 0;border-bottom:1px solid rgba(255,255,255,.06)}.team-perm-row:last-child{border-bottom:0}.team-perm-row label{font-weight:800;color:#eee}.team-perm-save{margin-top:10px;border:1px solid rgba(34,227,138,.30)!important;background:rgba(34,227,138,.08)!important;color:#a8f5c5!important;border-radius:9px;padding:8px 12px;font-weight:900;cursor:pointer}
+</style>
+
+<style id="lunge-voice-chat-style">
+.voice-section{background:linear-gradient(180deg,#120703,#080402)}
+.voice-grid{display:grid;grid-template-columns:1.25fr .75fr;gap:20px;max-width:1050px;margin:0 auto}
+.voice-panel{padding:22px;border-radius:20px;background:linear-gradient(145deg,rgba(48,25,10,.96),rgba(13,6,3,.98));border:1px solid rgba(255,177,70,.22);box-shadow:0 18px 50px rgba(0,0,0,.34)}
+.voice-head{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}.voice-head h3{font-family:'Rajdhani',sans-serif;font-size:26px;color:#ffd27a}.voice-state{font-size:12px;color:#bda990}
+.voice-login-lock{padding:30px 16px;text-align:center;border:1px dashed rgba(255,177,70,.25);border-radius:14px;color:#bfae9c}
+.voice-controls{display:flex;gap:9px;flex-wrap:wrap;margin-top:16px}.voice-btn{border:1px solid rgba(255,177,70,.35);background:rgba(255,157,44,.10);color:#ffd18a;border-radius:10px;padding:10px 14px;font-weight:900;cursor:pointer;transition:.18s}.voice-btn:hover{transform:translateY(-2px);background:rgba(255,157,44,.18)}.voice-btn.primary{background:linear-gradient(135deg,#ffb83f,#e66d18);color:#211303;border-color:rgba(255,211,126,.55)}.voice-btn.danger{border-color:rgba(255,92,82,.45);background:rgba(255,92,82,.10);color:#ffaaa4}.voice-btn:disabled{opacity:.45;cursor:not-allowed;transform:none}
+.voice-room{margin-top:16px;padding:14px;border-radius:14px;background:rgba(0,0,0,.22);border:1px solid rgba(255,177,70,.12)}
+.voice-room-title{font-size:12px;color:#a99886;text-transform:uppercase;letter-spacing:1.2px;font-weight:900;margin-bottom:9px}.voice-participants{display:grid;gap:8px}.voice-person{display:flex;align-items:center;gap:10px;padding:10px;border-radius:11px;background:rgba(255,255,255,.035);border:1px solid rgba(255,177,70,.10)}.voice-person-avatar{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(135deg,#ffb83f,#e66d18);color:#211303;font-weight:1000}.voice-person-info{min-width:0;flex:1}.voice-person-name{font-weight:900;color:#fff0d5;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.voice-person-status{font-size:11px;color:#9e8b78}.voice-mic{font-size:16px}.voice-empty{color:#857462;font-size:13px;padding:8px 0}.voice-note{margin-top:11px;font-size:11px;color:#887563;line-height:1.6}.voice-error{min-height:18px;margin-top:9px;color:#ff9b9b;font-size:12px}.voice-error.success{color:#69e7a0}
+.voice-visual{min-height:210px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;border-radius:16px;background:radial-gradient(circle,rgba(255,174,66,.13),transparent 58%)}.voice-orb{width:110px;height:110px;border-radius:50%;display:grid;place-items:center;font-size:44px;background:radial-gradient(circle at 35% 30%,#ffe0a0,#ff9f2e 48%,#7c260b 100%);box-shadow:0 0 30px rgba(255,151,40,.28);animation:voicePulse 1.8s ease-in-out infinite}.voice-orb.muted{filter:grayscale(.8);opacity:.65;animation:none}.voice-orb.off{opacity:.35;animation:none}.voice-privacy{margin-top:14px;font-size:12px;color:#a99886;line-height:1.6}.voice-privacy strong{color:#ffd18a}@keyframes voicePulse{0%,100%{transform:scale(1);box-shadow:0 0 25px rgba(255,151,40,.2)}50%{transform:scale(1.07);box-shadow:0 0 48px rgba(255,151,40,.34)}}
+@media(max-width:760px){.voice-grid{grid-template-columns:1fr}.voice-panel{padding:18px}.voice-visual{min-height:160px}.voice-orb{width:90px;height:90px;font-size:36px}}
+</style>
+</head>
+<body>
+<nav class="nav"><div class="nav-inner">
+  <a class="logo" href="#home">LUNGE <span>MC</span></a>
+  <div class="nav-social"><a class="nav-discord" href="https://discord.gg/6Utp7wnxdD" target="_blank" rel="noopener">💬 Discord</a><a class="nav-discord" href="https://www.instagram.com/lungemc_mc_555?utm_source=ig_web_button_share_sheet&stkn=ZDNlZDc0MzIxNw==" target="_blank" rel="noopener">📸 Instagram</a></div>
+  <div class="auth-actions">
+    <div class="auth-menu-group">
+      <button class="auth-btn" id="loginBtn" type="button" onclick="openAuth('login')">🔐 Login</button>
+      <button class="auth-btn sound-toggle-btn" id="soundToggleBtn" type="button" onclick="toggleSiteSound(true)" aria-label="Toggle sound">🔊 Sound ON</button>
+      <div class="nav-menu-wrap">
+        <button class="nav-menu-toggle" id="navMenuToggle" type="button" aria-label="Open navigation menu" aria-expanded="false" onclick="toggleNavMenu()">⋮</button>
+        <div class="nav-menu-dropdown" id="mainNavLinks"><a class="nav-menu-item" href="#home"><span class="nav-menu-emoji">🏠</span><span>Home</span></a>
+        <a class="nav-menu-item" href="#welcome"><span class="nav-menu-emoji">👋</span><span>Welcome</span></a>
+        <a class="nav-menu-item" href="#about"><span class="nav-menu-emoji">📖</span><span>About</span></a>
+        <a class="nav-menu-item" href="#modes"><span class="nav-menu-emoji">🎮</span><span>Game Modes</span></a>
+        <a class="nav-menu-item" href="#join"><span class="nav-menu-emoji">🚀</span><span>How to Join</span></a>
+        <a class="nav-menu-item" href="#teams"><span class="nav-menu-emoji">👥</span><span>Teams</span></a>
+        <a class="nav-menu-item" href="#chat"><span class="nav-menu-emoji">💬</span><span>Chat</span></a>
+        <button class="sound-menu-btn nav-menu-item" id="soundMenuBtn" type="button" onclick="toggleSiteSound(true)"><span class="nav-menu-emoji">🔊</span><span>Sound: ON</span></button>
+        <a class="nav-menu-item" href="#shop"><span class="nav-menu-emoji">🛒</span><span>Shop</span></a>
+        <a class="nav-menu-item" href="#events"><span class="nav-menu-emoji">🎉</span><span>Events</span></a>
+        <a class="nav-menu-item" href="#rules"><span class="nav-menu-emoji">📜</span><span>Rules</span></a>
+        <a class="nav-menu-item" href="#faq"><span class="nav-menu-emoji">❓</span><span>FAQ</span></a>
+        </div>
+      </div>
+    </div>
+    <div class="auth-user" id="authUser"><span class="auth-avatar" id="userAvatar">U</span><span><span class="auth-user-name" id="userUsername">Player</span><br><small id="userEmail"></small></span><button class="auth-btn" type="button" onclick="logoutUser()">Logout</button></div>
+  </div>
+</div></nav>
+
+
+<div class="auth-modal" id="authModal" aria-hidden="true">
+  <div class="auth-box">
+    <button class="auth-close" type="button" onclick="closeAuth()" aria-label="Close">×</button>
+    <h2 id="authTitle">Login</h2>
+    <p id="authDescription">Login with your Lunge MC account.</p>
+
+
+    <form id="authForm" onsubmit="handleAuth(event)">
+      <label class="auth-field"><span>Email</span><input id="authEmail" type="email" autocomplete="email" required placeholder="you@example.com"></label>
+      <label class="auth-field"><span>Password</span><input id="authPassword" type="password" autocomplete="current-password" minlength="6" required placeholder="••••••••"></label>
+
+      <label class="auth-field auth-username" id="usernameField">
+        <span>In-game Minecraft Username</span>
+        <input id="authUsername" type="text" autocomplete="nickname" minlength="3" maxlength="16" pattern="[A-Za-z0-9_]{3,16}" placeholder="YourMinecraftName">
+      </label>
+
+      <button class="auth-submit" id="authSubmit" type="submit">Login</button>
+      <div class="auth-msg" id="authMsg"></div>
+    </form>
+    <div class="auth-switch"><span id="authSwitchText">Don't have an account?</span> <button type="button" id="authSwitchBtn" onclick="toggleAuthMode()">Create account</button><span class="account-create-note">Create a free Lunge MC account</span></div>
+  </div>
+</div>
+
+<main>
+<section class="hero" id="home">
+  <div class="stars"></div><div class="cloud c1"></div><div class="cloud c2"></div><div class="cloud c3"></div>
+  <div class="island i1"></div><div class="island i2"></div><div class="island i3"></div><div class="island i4"></div><div class="waterfall w1"></div><div class="waterfall w2"></div>
+  <div class="hero-content">
+    <div class="hero-pill">🍩 WELCOME TO LUNGE MC • MINECRAFT SURVIVAL</div>
+    <h1>LUNGE <span>MC</span></h1>
+    <p class="hero-sub">BUILD • SURVIVE • FIGHT • DOMINATE<br>Join Lunge MC — where legends are built.</p>
+    <div class="hero-actions"><a class="btn btn-primary" href="https://discord.gg/6Utp7wnxdD" target="_blank" rel="noopener">💬 Join Discord</a><a class="btn btn-secondary" href="#about">Explore Server →</a></div>
+    <div class="server-card player-only"><div class="server-cell player-count-cell"><div class="player-count-line">👥 <span id="player-count">—</span> Players Online</div></div></div>
+  </div>
+</section>
+
+
+<section class="section welcome-section" id="welcome">
+  <div class="welcome-content">
+    <div class="eyebrow">WELCOME TO LUNGE MC</div>
+    <h1 class="section-title welcome-title">Welcome, Adventurer!</h1>
+    <p class="welcome-text">
+      Enter the world of LUNGE MC — build, survive, fight and make your name on our Minecraft SMP.
+    </p>
+    <div class="welcome-actions">
+      <a class="btn primary" href="#shop">Explore Ranks</a>
+      <a class="btn" href="#about">Learn More</a>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="join"><div class="section-wrap">
+  <div class="eyebrow">🍩 CONNECT TO THE SERVER</div><h2 class="section-title">How To Join Lunge MC</h2><p class="section-sub">Choose your Minecraft edition, copy the server details, and jump into the adventure.</p>
+  <div class="join-grid">
+    <div class="join-card"><span class="join-label">☕ JAVA EDITION</span><h3>💻 Java Players</h3><p class="join-desc">For Minecraft Java Edition on PC. Add the server using this address:</p><div class="join-value-row"><div class="join-value" id="java-server-address">play.lungemc.fun:20005</div><button class="join-copy" type="button" onclick="copyServerAddress('java-server-address',this)">Copy IP</button></div><p class="join-port">Server address includes the port <strong>20005</strong>.</p><div class="join-steps"><div class="join-step"><b>1</b><span>Open <strong>Multiplayer</strong> in Minecraft.</span></div><div class="join-step"><b>2</b><span>Choose <strong>Add Server</strong> and paste the address above.</span></div><div class="join-step"><b>3</b><span>Click <strong>Join Server</strong> and have fun!</span></div></div></div>
+    <div class="join-card"><span class="join-label">🎮 BEDROCK EDITION</span><h3>📱 Bedrock Players</h3><p class="join-desc">For Minecraft Bedrock on mobile, Windows, and compatible consoles:</p><div class="join-value-row"><div class="join-value" id="bedrock-server-address">play.lungemc.fun</div><button class="join-copy" type="button" onclick="copyServerAddress('bedrock-server-address',this)">Copy IP</button></div><div class="join-port-row"><span class="join-port-label">Port</span><div class="join-port-value" id="bedrock-server-port">20005</div><button class="join-copy" type="button" onclick="copyServerAddress('bedrock-server-port',this)">Copy Port</button></div><div class="join-steps"><div class="join-step"><b>1</b><span>Open <strong>Play</strong>, then go to the <strong>Servers</strong> tab.</span></div><div class="join-step"><b>2</b><span>Choose <strong>Add Server</strong>.</span></div><div class="join-step"><b>3</b><span>Enter the address and port shown above, then connect.</span></div></div></div>
+  </div>
+  <p class="join-help">Need help joining? <strong><a href="https://discord.gg/6Utp7wnxdD" target="_blank" rel="noopener">Join our Discord</a></strong> and ask the Lunge MC staff.</p>
+</div></section>
+
+<section class="section" id="chat"><div class="section-wrap">
+  <div class="eyebrow">💬 COMMUNITY CHAT</div><h2 class="section-title">Lunge MC Chat</h2><p class="section-sub">Login or register to read and send messages. Guests cannot use the chat.</p>
+  <div class="chat-grid"><div class="chat-panel"><h3>🌐 Global Chat</h3><div class="chat-sub">Everyone using the same server website can see this chat when Firebase is connected.</div><div id="firebaseChatConfigNotice" class="chat-status" style="display:none;margin-bottom:10px">⚠️ Shared chat is not connected yet. Add your Firebase Web App config to make chat visible across different accounts/devices.</div><div id="globalChatArea"><div class="chat-login-lock">🔐 Please login or register to use chat.<br><button type="button" onclick="openAuth('login')" style="margin-top:10px">Login / Register</button></div></div></div></div>
+  <div class="chat-panel skin-panel"><h3>🧑‍🎮 Player Skin</h3><div class="skin-sub">अपना Minecraft Player Name डालो — उसकी skin अपने आप आ जाएगी। चाहो तो नीचे अपना custom skin image URL भी set कर सकते हो।</div><div class="skin-tools"><input id="skinPlayerName" maxlength="16" placeholder="Minecraft player name"><button class="chat-send" type="button" onclick="previewPlayerSkin()">🔎 Find Skin</button></div><div class="skin-tools" style="margin-top:9px"><input id="customSkinUrl" placeholder="Custom skin/image URL (optional — खाली छोड़ सकते हो)"><button class="chat-send" type="button" onclick="saveCustomSkin()">💾 Set Skin</button></div><div id="skinPreview" class="skin-preview"><img id="skinPreviewImg" class="skin-avatar" alt="Player skin"><div><b id="skinPreviewName">Login / Register</b><div id="skinPreviewStatus" class="skin-sub" style="margin:3px 0 0">Chat में यही skin/head दिखेगा।</div></div></div></div>
+</div></section>
+
+<section class="section teams-section" id="teams"><div class="section-wrap">
+  <div class="eyebrow">👥 BUILD YOUR SQUAD</div>
+  <h2 class="section-title">Lunge MC Teams</h2>
+  <p class="section-sub">Login or register to create your own team. You can join up to 2 teams.</p>
+  <div class="teams-grid">
+    <div class="team-panel">
+      <h3>⚔️ Create Your Team</h3>
+      <p>Make your squad and invite other Lunge MC players to join.</p>
+      <form class="team-form" id="createTeamForm" onsubmit="createTeam(event)">
+        <input id="teamNameInput" type="text" minlength="3" maxlength="24" required placeholder="Team name">
+        <input id="teamTagInput" type="text" minlength="2" maxlength="6" required pattern="[A-Za-z0-9]{2,6}" placeholder="Team tag (2-6 letters/numbers)">
+        <div class="team-logo-input"><div id="teamLogoPlaceholder" class="team-logo-placeholder">🖼️</div><img id="teamLogoPreview" class="team-logo-preview" alt="Team logo preview"><div style="flex:1"><b style="font-size:12px">Team Photo / Logo</b><div style="font-size:10px;opacity:.65;margin-top:3px">Optional • JPG/PNG/WebP</div></div><input id="teamLogoInput" type="file" accept="image/png,image/jpeg,image/webp" onchange="previewTeamLogo(this)"></div>
+        <div class="team-visibility-row" aria-label="Team visibility">
+          <label class="team-visibility-option"><input type="radio" name="teamVisibility" value="public" checked><span>🌍 Public Team</span></label>
+          <label class="team-visibility-option"><input type="radio" name="teamVisibility" value="private"><span>🔒 Private Team</span></label>
+        </div>
+        <button class="team-submit" type="submit">➕ Create Team</button>
+      </form>
+      <div id="teamCreateStatus" class="team-status"></div>
+      <div class="team-lock" id="teamCreateLock">🔐 Login/Register first to create a team. <button type="button" onclick="openAuth('login')">Login</button></div>
+      <div class="my-teams" id="myTeams"></div>
+    </div>
+    <div class="team-panel">
+      <h3>🎮 Join A Team</h3>
+      <p>Choose a team below. Each account can join up to 2 teams.</p>
+      <div class="team-toolbar"><input id="teamSearchInput" class="team-search" type="search" maxlength="30" placeholder="🔎 Search team or tag…" oninput="filterTeams(this.value)"><span class="team-count-pill" id="teamCountPill">0 teams</span></div>
+      <div class="team-list" id="teamList"><div class="team-empty">Loading teams…</div></div>
+      <div id="teamJoinStatus" class="team-status"></div>
+    </div>
+  </div>
+</div></section>
+
+<div class="auth-modal" id="teamChatModal"><div class="auth-box" style="max-width:560px"><button class="auth-close" type="button" onclick="closeTeamChat()">×</button><h2 id="teamChatTitle">Team Messages</h2><p id="teamChatSubtitle">Only members of this team can send team messages.</p><div id="teamChatList" class="team-chat-list"></div><div class="chat-compose"><button class="chat-attach-btn" type="button" onclick="document.getElementById('teamChatImage').click()">📷</button><input id="teamChatInput" maxlength="500" placeholder="Write a team message…"><button class="chat-send" type="button" onclick="sendTeamMessage()">Send</button><input id="teamChatImage" type="file" accept="image/png,image/jpeg,image/webp" hidden onchange="previewChatImage(this,'teamChatImagePreview')"><div id="teamMentionList" class="team-mention-list"></div></div><div id="teamChatImagePreview" class="chat-image-preview"><img id="teamChatImageThumb"><span>Photo attached</span><button type="button" onclick="clearChatImage('teamChatImage')">✕</button></div><div id="teamChatStatus" class="chat-status"></div><div class="team-invite"><input id="teamInvitePlayer" type="text" placeholder="Minecraft player name to invite"><button type="button" onclick="sendTeamInviteFromModal()">📨 Invite Player</button></div></div></div>
+
+<section class="section alt" id="about"><div class="section-wrap">
+  <div class="eyebrow">WELCOME TO LUNGE MC</div><h2 class="section-title">Your Next Minecraft Adventure Starts Here.</h2><p class="section-sub">A community-focused server built for survival, PvP, events, progression and having a great time with friends.</p>
+  <div class="feature-grid">
+    <div class="feature"><div class="feature-icon">🌍</div><h3>Survival</h3><p>Build bases, create farms, explore and grow your world with the community.</p></div>
+    <div class="feature"><div class="feature-icon">⚔️</div><h3>PvP</h3><p>Fight players, sharpen your skills and prove who really dominates.</p></div>
+    <div class="feature"><div class="feature-icon">🎮</div><h3>Game Modes</h3><p>Enjoy different ways to play with more features and events coming soon.</p></div>
+    <div class="feature"><div class="feature-icon">🎁</div><h3>Events & Giveaways</h3><p>Take part in community events, rewards, giveaways and special server moments.</p></div>
+  </div>
+  <div class="stats"><div class="stat"><b>24/7</b><span>Server Experience</span></div><div class="stat"><b>⚔ PvP</b><span>Competitive Gameplay</span></div><div class="stat"><b>🎁 Events</b><span>Community Rewards</span></div><div class="stat"><b>💬 Discord</b><span>Player Support</span></div></div>
+</div></section>
+
+<section class="section" id="modes"><div class="section-wrap"><div class="eyebrow">PLAY YOUR WAY</div><h2 class="section-title">Game Modes</h2><p class="section-sub">Pick your style and jump into the Lunge MC experience.</p>
+<div class="feature-grid"><div class="feature"><div class="feature-icon">🏠</div><h3>Survival</h3><p>Classic survival progression with building, farms and exploration.</p></div></div>
+</div></section>
+
+<section class="section discord-section alt" id="discord"><div class="section-wrap"><div class="discord-box"><div class="eyebrow">JOIN THE COMMUNITY</div><h2>Ready to join Lunge MC?</h2><p>Get updates, support, events, giveaways and connect with the Lunge MC community on Discord.</p><div class="social-actions"><a class="btn btn-primary" href="https://discord.gg/6Utp7wnxdD" target="_blank" rel="noopener">💬 Join Discord →</a><a class="btn btn-instagram" href="https://www.instagram.com/lungemc_mc_555?utm_source=ig_web_button_share_sheet&stkn=ZDNlZDc0MzIxNw==" target="_blank" rel="noopener">📸 Follow Instagram →</a></div></div></div></section>
+
+<section class="section" id="shop"><div class="section-wrap"><div class="eyebrow">SERVER SHOP</div><h2 class="section-title">Choose Your Rank</h2><p class="section-sub">Optional ranks to support Lunge MC and unlock extra perks.</p>
+<div class="shop-grid">
+  <div class="shop-card deadliest"><div class="rank-art"><div class="rank-badge">⚔</div></div><div class="rank-info"><div class="rank-heading-row"><div class="rank-name">Deadliest</div><a class="btn-buy" href="https://discord.gg/6Utp7wnxdD" target="_blank" rel="noopener">🛒 Buy</a></div><div class="price">₹50</div><span class="rank-tag">GREEN • COMBAT</span></div></div>
+  <div class="shop-card vip"><div class="rank-art"><div class="rank-badge">★</div></div><div class="rank-info"><div class="rank-heading-row"><div class="rank-name">VIP</div><a class="btn-buy" href="https://discord.gg/6Utp7wnxdD" target="_blank" rel="noopener">🛒 Buy</a></div><div class="price">₹70</div><span class="rank-tag">YELLOW • PREMIUM</span></div></div>
+  <div class="shop-card mvp"><div class="rank-art"><div class="rank-badge">◆</div></div><div class="rank-info"><div class="rank-heading-row"><div class="rank-name">MVP</div><a class="btn-buy" href="https://discord.gg/6Utp7wnxdD" target="_blank" rel="noopener">🛒 Buy</a></div><div class="price">₹100</div><span class="rank-tag">BLUE • ELITE</span></div></div>
+  <div class="shop-card lunge"><div class="rank-art"><div class="rank-badge">♛</div></div><div class="rank-info"><div class="rank-heading-row"><div class="rank-name">Lunge</div><a class="btn-buy" href="https://discord.gg/6Utp7wnxdD" target="_blank" rel="noopener">🛒 Buy</a></div><div class="price">₹200</div><span class="rank-tag">RED • TOP RANK</span></div></div>
+</div>
+<div class="rank-note"><strong>💬 Want a rank added to your account?</strong><p>After your purchase, contact an Admin or the Server Owner on our Discord so your rank can be added to your account.</p><a class="btn btn-primary" href="https://discord.gg/6Utp7wnxdD" target="_blank" rel="noopener">Contact Us on Discord →</a></div>
+</div></section>
+
+
+
+<section class="section alt" id="events"><div class="section-wrap"><div class="eyebrow">STAY TUNED</div><h2 class="section-title">Events & Giveaways</h2><p class="section-sub">Community events, rewards and special announcements are shared through Discord. Join in and don't miss the next one.</p><div class="discord-box"><h2>Something big could be next 👀</h2><p>Watch Discord for announcements, giveaways and special server events.</p><a class="btn btn-secondary" href="https://discord.gg/6Utp7wnxdD" target="_blank" rel="noopener">Open Discord</a></div></div></section>
+
+<section class="section" id="rules"><div class="section-wrap"><div class="eyebrow">⛏️ PLAY FAIR • SMP RULES</div><h2 class="section-title">⛏️ Minecraft Server Rules</h2><p class="section-sub">Please follow these rules to keep our community fair and welcoming.</p><div class="rules-grid">
+<div class="rule"><strong>Rule 1: Respect All Players</strong><p>Do not harass, insult, threaten, or intentionally ruin another player's experience.</p></div>
+<div class="rule"><strong>Rule 2: No Cheating or Hacked Clients</strong><p>Hacked clients, unfair modifications, cheats, or tools that provide an unfair advantage are strictly prohibited.</p></div>
+<div class="rule"><strong>Rule 3: No Exploiting Bugs</strong><p>Do not abuse glitches, bugs, duplication exploits, or unintended server mechanics. Report them to staff.</p></div>
+<div class="rule"><strong>Rule 4: No Griefing or Stealing</strong><p>Do not destroy, damage, or steal from another player's builds, items, or property without permission.</p></div>
+<div class="rule"><strong>Rule 5: No Scamming</strong><p>Scamming, deceptive trades, or intentionally misleading players during transactions is prohibited.</p></div>
+<div class="rule"><strong>Rule 6: No Unapproved Advertising</strong><p>Advertising other Minecraft servers, Discord servers, or unrelated services without staff permission is not allowed.</p></div>
+<div class="rule"><strong>Rule 7: No Lag Machines</strong><p>Do not intentionally create machines, farms, redstone systems, or setups designed to cause server lag or performance issues.</p></div>
+<div class="rule"><strong>Rule 8: No Ban Evasion</strong><p>Do not use alternate accounts or other methods to bypass a punishment or ban.</p></div>
+<div class="rule"><strong>Rule 9: No Inappropriate Builds or Names</strong><p>Inappropriate, offensive, or harmful builds, skins, usernames, or structures are not allowed.</p></div>
+<div class="rule"><strong>Rule 10: No Real-World Trading</strong><p>Buying or selling in-game items, accounts, ranks, or currency for real money outside of officially approved methods is prohibited.</p></div>
+</div><div class="rank-note rules-thanks"><strong>Thank you all for being a part of our community! ❤️</strong><p>@everyone</p></div></div></section>
+
+<section class="section alt" id="faq"><div class="section-wrap"><div class="eyebrow">NEED TO KNOW</div><h2 class="section-title">FAQ</h2><p class="section-sub">Quick answers before you join Lunge MC.</p><div class="faq-grid"><div class="faq"><h3>🎮 What is the server IP?</h3><p>Use <strong>play.lungemc.fun:20005</strong> to connect.</p></div><div class="faq"><h3>💬 Where can I get support?</h3><p>Join our Discord and contact the staff for help.</p></div><div class="faq"><h3>🎁 Where are giveaways announced?</h3><p>Giveaways and events are announced through the Lunge MC Discord community.</p></div><div class="faq"><h3>🛒 Are ranks required?</h3><p>No. Ranks are optional and the server can be enjoyed without purchasing one.</p></div></div></div></section>
+</main>
+<footer class="footer"><strong>Lunge MC</strong> — Minecraft server community<br><span class="server-ip">IP: play.lungemc.fun:20005</span><p style="margin-top:12px">© 2026 Lunge MC. Not affiliated with Mojang Studios or Microsoft.</p></footer>
+
+
+
+<script>
+function updateLocalAuthUI(){
+  if (window.__lungeFirebaseReady) return;
+  const loginBtn = document.getElementById("loginBtn");
+  const authUser = document.getElementById("authUser");
+  const userEmail = document.getElementById("userEmail");
+  const userUsername = document.getElementById("userUsername");
+  const userAvatar = document.getElementById("userAvatar");
+  if(!loginBtn || !authUser) return;
+
+  const email = localStorage.getItem("lunge_mc_active_user");
+  const accounts = JSON.parse(localStorage.getItem("lunge_mc_accounts") || "{}");
+  const account = email ? accounts[email] : null;
+
+  const createAccountBtn = document.getElementById("createAccountBtn");
+  if(account){
+    loginBtn.style.display = "none";
+    if(createAccountBtn) createAccountBtn.style.display = "none";
+    authUser.classList.add("show");
+    userUsername.textContent = account.username || "Player";
+    userEmail.textContent = account.email || "";
+    userAvatar.textContent = (account.username || "P").charAt(0).toUpperCase();
+  }else{
+    loginBtn.style.display = "";
+    if(createAccountBtn) createAccountBtn.style.display = "";
+    authUser.classList.remove("show");
+  }
+  if(window.updateTeamAccess) updateTeamAccess();
+  if(window.loadTeams) loadTeams();
+  if(window.refreshChatAccess) refreshChatAccess();
+}
+
+document.addEventListener("DOMContentLoaded", updateLocalAuthUI);
+</script>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-app.js";
+import {
+  getAuth, onAuthStateChanged, signInWithEmailAndPassword,
+  createUserWithEmailAndPassword, signOut, updateProfile
+} from "https://www.gstatic.com/firebasejs/12.4.0/firebase-auth.js";
+import {
+  getFirestore, doc, getDoc, setDoc, collection, getDocs, addDoc, updateDoc, deleteDoc, arrayUnion, query, orderBy, onSnapshot, where
+} from "https://www.gstatic.com/firebasejs/12.4.0/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "PASTE_YOUR_FIREBASE_API_KEY",
+  authDomain: "PASTE_YOUR_PROJECT.firebaseapp.com",
+  projectId: "PASTE_YOUR_PROJECT_ID",
+  storageBucket: "PASTE_YOUR_PROJECT.firebasestorage.app",
+  messagingSenderId: "PASTE_YOUR_MESSAGING_SENDER_ID",
+  appId: "PASTE_YOUR_FIREBASE_APP_ID"
+};
+
+
+/*
+  Optional login-email notification.
+  Recommended: use a Firebase Cloud Function/Email Extension for production.
+  This client-side hook is intentionally disabled until you provide an endpoint.
+  Your backend should accept {email, username, provider} and send the message.
+*/
+const LOGIN_EMAIL_ENDPOINT = ""; // e.g. https://YOUR_REGION-YOUR_PROJECT.cloudfunctions.net/sendLoginEmail
+
+const firebaseReady = !firebaseConfig.apiKey.startsWith("PASTE_");
+
+window.__lungeFirebaseReady = firebaseReady;
+let auth = null;
+let db = null;
+
+if (firebaseReady) {
+  const app = initializeApp(firebaseConfig);
+  auth = getAuth(app);
+  db = getFirestore(app);
+  window.__lungeDb = db;
+  window.__lungeAuth = auth;
+  window.__lungeFirestore = { getDocs, addDoc, collection, query, orderBy, where, doc, setDoc, updateDoc, deleteDoc, arrayUnion, onSnapshot };
+
+  onAuthStateChanged(auth, async (user) => {
+    const loginBtn = document.getElementById("loginBtn");
+    const authUser = document.getElementById("authUser");
+    const userEmail = document.getElementById("userEmail");
+    const userUsername = document.getElementById("userUsername");
+    const userAvatar = document.getElementById("userAvatar");
+
+    const createAccountBtn = document.getElementById("createAccountBtn");
+    if (user) {
+      loginBtn.style.display = "none";
+      if(createAccountBtn) createAccountBtn.style.display = "none";
+      authUser.classList.add("show");
+
+      const profile = await getPlayerProfile(user);
+      const username = profile.username || user.displayName || user.email?.split("@")[0] || "Player";
+
+      userUsername.textContent = username;
+      userEmail.textContent = user.email || "Google Account";
+      userAvatar.textContent = username.charAt(0).toUpperCase();
+
+      closeAuth();
+      updateTeamAccess();
+      loadTeams();
+      if(window.refreshChatAccess) setTimeout(window.refreshChatAccess,80);
+      if(window.refreshVoiceAccess) setTimeout(window.refreshVoiceAccess,50);
+    } else {
+      loginBtn.style.display = "";
+      if(createAccountBtn) createAccountBtn.style.display = "";
+      authUser.classList.remove("show");
+      userEmail.textContent = "";
+      userUsername.textContent = "Player";
+      updateTeamAccess();
+      loadTeams();
+    }
+  });
+} else {
+  window.__lungeDb = null;
+  window.__lungeAuth = null;
+  window.__lungeFirestore = null;
+  console.warn("Firebase is not configured yet. Add your Firebase Web App config.");
+}
+
+let authMode = "login";
+
+function showWelcome(username, firstLogin = false) {
+  const box = document.getElementById("lungeWelcome");
+  const title = document.getElementById("lungeWelcomeTitle");
+  const text = document.getElementById("lungeWelcomeText");
+  if (!box || !title || !text) return;
+
+  title.textContent = firstLogin
+    ? `Welcome to Lunge MC, ${username}! 🎉`
+    : `Welcome back, ${username}! 👋`;
+
+  text.textContent = firstLogin
+    ? "Your account has been created successfully."
+    : "You are successfully logged in.";
+
+  box.classList.add("show");
+  clearTimeout(window.__lungeWelcomeTimer);
+  window.__lungeWelcomeTimer = setTimeout(() => {
+    box.classList.remove("show");
+  }, 4500);
+}
+
+
+window.openAuth = function(mode = "login") {
+  authMode = mode;
+  document.getElementById("authModal").classList.add("show");
+  document.getElementById("authModal").setAttribute("aria-hidden","false");
+  updateAuthUI();
+};
+
+window.closeAuth = function() {
+  document.getElementById("authModal").classList.remove("show");
+  document.getElementById("authModal").setAttribute("aria-hidden","true");
+  document.getElementById("authMsg").textContent = "";
+};
+
+window.toggleAuthMode = function() {
+  authMode = authMode === "login" ? "signup" : "login";
+  updateAuthUI();
+};
+
+function updateAuthUI() {
+  const signup = authMode === "signup";
+  document.getElementById("authTitle").textContent = signup ? "Create Account" : "Login";
+  document.getElementById("authDescription").textContent = signup
+    ? "Create your Lunge MC account and link your Minecraft username."
+    : "Login with email/password or Google.";
+  document.getElementById("authSubmit").textContent = signup ? "Create Account" : "Login";
+  document.getElementById("authSwitchText").textContent = signup ? "Already have an account?" : "Don't have an account?";
+  document.getElementById("authSwitchBtn").textContent = signup ? "Login" : "Create account";
+  document.getElementById("usernameField").style.display = signup ? "block" : "none";
+  document.getElementById("authUsername").required = signup;
+  document.getElementById("authMsg").textContent = "";
+  document.getElementById("authMsg").classList.remove("auth-success");
+}
+
+async function savePlayerProfile(user, username, provider = "password") {
+  if (!db || !user) return;
+  await setDoc(doc(db, "players", user.uid), {
+    uid: user.uid,
+    email: user.email || "",
+    username,
+    usernameLower: String(username || "").trim().toLowerCase(),
+    provider,
+    updatedAt: new Date().toISOString()
+  }, { merge: true });
+}
+
+async function getPlayerProfile(user) {
+  if (!db || !user) return {};
+  try {
+    const snap = await getDoc(doc(db, "players", user.uid));
+    return snap.exists() ? snap.data() : {};
+  } catch (e) {
+    console.warn("Could not read player profile:", e);
+    return {};
+  }
+}
+
+async function ensureUsername(user, provider = "google") {
+  const profile = await getPlayerProfile(user);
+  if (profile.username) return profile.username;
+
+  const username = prompt("Login successful! Enter your Minecraft in-game username:");
+  if (!username || !/^[A-Za-z0-9_]{3,16}$/.test(username.trim())) {
+    throw new Error("Please enter a valid Minecraft username (3-16 letters, numbers or _).");
+  }
+
+  const clean = username.trim();
+  await reserveGameId(user, clean, provider);
+
+  if (!user.displayName) {
+    try { await updateProfile(user, { displayName: clean }); } catch (e) {}
+  }
+  return clean;
+}
+
+async function sendLoginEmail(user, username, provider) {
+  if (!LOGIN_EMAIL_ENDPOINT || !user?.email) return;
+
+  try {
+    await fetch(LOGIN_EMAIL_ENDPOINT, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        email: user.email,
+        username,
+        provider,
+        message: `Successfully logged in to Lunge MC as ${username}.`
+      })
+    });
+  } catch (e) {
+    console.warn("Login email notification failed:", e);
+  }
+}
+
+function showSuccess(message) {
+  const msg = document.getElementById("authMsg");
+  msg.textContent = message;
+  msg.classList.add("auth-success");
+}
+
+async function isGameIdTaken(gameName, excludeUid = "") {
+  const clean = String(gameName || "").trim().toLowerCase();
+  if (!clean) return false;
+  if (firebaseReady && db) {
+    try {
+      const snap = await getDocs(query(collection(db, "players"), where("usernameLower", "==", clean)));
+      return snap.docs.some(d => String(d.id) !== String(excludeUid));
+    } catch (e) {
+      console.warn("Could not check Game ID uniqueness:", e);
+      throw new Error("Game ID verify नहीं हो पाया. फिर कोशिश करें.");
+    }
+  }
+  const accounts = JSON.parse(localStorage.getItem("lunge_mc_accounts") || "{}");
+  return Object.values(accounts).some(a => String(a.username || a.gameName || "").trim().toLowerCase() === clean);
+}
+
+async function reserveGameId(user, username, provider = "password") {
+  const clean = String(username || "").trim();
+  const taken = await isGameIdTaken(clean, user?.uid || "");
+  if (taken) throw new Error("यह Game ID पहले से किसी ने ले रखी है. दूसरी Game ID डालें.");
+  if (db && user) {
+    await setDoc(doc(db, "players", user.uid), {
+      uid: user.uid,
+      email: user.email || "",
+      username: clean,
+      usernameLower: clean.toLowerCase(),
+      provider,
+      updatedAt: new Date().toISOString()
+    }, { merge: true });
+  }
+  return clean;
+}
+
+window.handleAuth = async function(event) {
+  event.preventDefault();
+
+  const msg = document.getElementById("authMsg");
+  const email = document.getElementById("authEmail").value.trim().toLowerCase();
+  const password = document.getElementById("authPassword").value;
+  const usernameInput = document.getElementById("authUsername").value.trim();
+
+  msg.classList.remove("auth-success");
+  msg.textContent = "Please wait…";
+
+  /* Real Firebase mode when configured; otherwise use a browser-local demo account
+     so the UI is usable without exposing fake Firebase credentials. */
+  if (!firebaseReady || !auth) {
+    try {
+      const accounts = JSON.parse(localStorage.getItem("lunge_mc_accounts") || "{}");
+      const activeKey = "lunge_mc_active_user";
+
+      if (!email || !password) throw new Error("Email और password डालें.");
+      if (password.length < 6) throw new Error("Password कम से कम 6 characters का रखें.");
+
+      if (authMode === "signup") {
+        if (!/^[A-Za-z0-9_]{3,16}$/.test(usernameInput)) {
+          throw new Error("Minecraft username 3-16 characters का होना चाहिए और सिर्फ letters, numbers या _ रखें.");
+        }
+        if (accounts[email]) throw new Error("इस email से account पहले से मौजूद है. Login करें.");
+        const gameIdTaken = Object.values(accounts).some(a => String(a.username || a.gameName || "").trim().toLowerCase() === usernameInput.toLowerCase());
+        if (gameIdTaken) throw new Error("यह Game ID पहले से किसी ने ले रखी है. दूसरी Game ID डालें.");
+        accounts[email] = {
+          email,
+          password,
+          username: usernameInput,
+          gameName: usernameInput,
+          provider: "local",
+          createdAt: new Date().toISOString()
+        };
+        localStorage.setItem("lunge_mc_accounts", JSON.stringify(accounts));
+        localStorage.setItem(activeKey, email);
+        showSuccess("Account created successfully!");
+        showWelcome(usernameInput, true);
+        document.getElementById("authEmail").value = "";
+        document.getElementById("authPassword").value = "";
+        document.getElementById("authUsername").value = "";
+        updateLocalAuthUI();
+        if(window.refreshChatAccess) window.refreshChatAccess();
+        if(window.updateTeamAccess) window.updateTeamAccess();
+        setTimeout(closeAuth, 500);
+      } else {
+        const account = accounts[email];
+        if (!account || account.password !== password) {
+          throw new Error("Email या password गलत है.");
+        }
+        localStorage.setItem(activeKey, email);
+        showSuccess("Login successful!");
+        showWelcome(account.username, false);
+        updateLocalAuthUI();
+        if(window.refreshChatAccess) window.refreshChatAccess();
+        if(window.updateTeamAccess) window.updateTeamAccess();
+        setTimeout(closeAuth, 500);
+      }
+    } catch (error) {
+      msg.textContent = error.message || "Login नहीं हो पाया. फिर कोशिश करें.";
+    }
+    return;
+  }
+
+  try {
+    let user;
+    let provider = "password";
+
+    if (authMode === "signup") {
+      if (!/^[A-Za-z0-9_]{3,16}$/.test(usernameInput)) {
+        throw new Error("Minecraft username 3-16 characters का होना चाहिए और सिर्फ letters, numbers या _ रखें.");
+      }
+
+      const gameIdTaken = await isGameIdTaken(usernameInput);
+      if (gameIdTaken) throw new Error("यह Game ID पहले से किसी ने ले रखी है. दूसरी Game ID डालें.");
+
+      const result = await createUserWithEmailAndPassword(auth, email, password);
+      user = result.user;
+      await reserveGameId(user, usernameInput, provider);
+
+      try { await updateProfile(user, { displayName: usernameInput }); } catch (e) {}
+
+      showSuccess("Account created successfully!");
+      showWelcome(usernameInput, true);
+      await sendLoginEmail(user, usernameInput, provider);
+    } else {
+      const result = await signInWithEmailAndPassword(auth, email, password);
+      user = result.user;
+
+      const username = await ensureUsername(user, provider);
+      showSuccess("Login successful!");
+      showWelcome(username, false);
+      await sendLoginEmail(user, username, provider);
+    }
+  } catch (error) {
+    const messages = {
+      "auth/invalid-credential": "Email या password गलत है.",
+      "auth/email-already-in-use": "इस email से account पहले से मौजूद है.",
+      "auth/weak-password": "Password कम से कम 6 characters का रखें.",
+      "auth/invalid-email": "Valid email डालें.",
+    };
+    msg.textContent = messages[error.code] || error.message || "Login नहीं हो पाया. फिर कोशिश करें.";
+  }
+};
+
+
+
+
+/* ===================== LUNGE MC SITE OWNER ===================== */
+const LUNGE_SITE_OWNER_EMAIL = "owner@lungemc.fun";
+const LUNGE_SITE_OWNER_PASSWORD = "LungeOwner@2026!";
+function isLungeSiteOwner(email){
+  return String(email||"").trim().toLowerCase()===LUNGE_SITE_OWNER_EMAIL;
+}
+window.isLungeSiteOwner=isLungeSiteOwner;
+
+// Create the demo Owner account for the built-in/local login mode.
+try{
+  const ownerAccounts=JSON.parse(localStorage.getItem("lunge_mc_accounts")||"{}");
+  if(!ownerAccounts[LUNGE_SITE_OWNER_EMAIL]){
+    ownerAccounts[LUNGE_SITE_OWNER_EMAIL]={email:LUNGE_SITE_OWNER_EMAIL,password:LUNGE_SITE_OWNER_PASSWORD,username:"LungeOwner",gameName:"LungeOwner",provider:"local",role:"owner",createdAt:new Date().toISOString()};
+    localStorage.setItem("lunge_mc_accounts",JSON.stringify(ownerAccounts));
+  }
+}catch(e){}
+
+/* ===================== LUNGE MC TEAMS ===================== */
+function getLocalActiveAccount(){
+  const email = localStorage.getItem("lunge_mc_active_user");
+  const accounts = JSON.parse(localStorage.getItem("lunge_mc_accounts") || "{}");
+  return email && accounts[email] ? accounts[email] : null;
+}
+
+function getTeamMemberCount(team){
+  return Array.isArray(team.members) ? team.members.length : Number(team.memberCount || 0);
+}
+
+function setTeamStatus(id, message, success=false){
+  const el=document.getElementById(id); if(!el) return;
+  el.textContent=message || "";
+  el.classList.toggle("success", !!success);
+}
+
+function currentTeamUser(){
+  if(window.__lungeFirebaseReady && window.__lungeAuth?.currentUser){
+    const u=window.__lungeAuth.currentUser;
+    const email=u.email||"";
+    return {uid:u.uid,email,username:u.displayName||email.split("@")[0]||"Player",role:isLungeSiteOwner(email)?"owner":"member",isSiteOwner:isLungeSiteOwner(email)};
+  }
+  const a=getLocalActiveAccount();
+  return a ? {uid:"local:"+a.email,email:a.email,username:a.username||"Player",role:isLungeSiteOwner(a.email)?"owner":(a.role||"member"),isSiteOwner:isLungeSiteOwner(a.email)} : null;
+}
+window.currentTeamUser = currentTeamUser;
+
+async function readFirebaseTeams(){
+  if(!db) return [];
+  try{
+    const snap=await getDocs(collection(db,"teams"));
+    return snap.docs.map(d=>({id:d.id,...d.data()}));
+  }catch(e){
+    console.warn("Could not read teams:",e);
+    return [];
+  }
+}
+
+function readLocalTeams(){
+  return JSON.parse(localStorage.getItem("lunge_mc_teams") || "[]");
+}
+window.readFirebaseTeams = readFirebaseTeams;
+window.readLocalTeams = readLocalTeams;
+
+function teamUserPermissions(team,user){
+  if(!team||!user) return {};
+  if(user.isSiteOwner || String(team.ownerUid)===String(user.uid)) return {editTeam:true,manageMembers:true,manageChat:true,invitePlayers:true};
+  const m=(team.members||[]).find(x=>String(x.uid)===String(user.uid));
+  return (m&&m.permissions)||{};
+}
+function canTeamManageMembers(team,user){ return !!teamUserPermissions(team,user).manageMembers; }
+function teamRoles(team){ return Array.isArray(team?.roles)?team.roles:[]; }
+async function loadTeams(){
+  const list=document.getElementById("teamList");
+  if(!list) return;
+  let teams=[];
+  if(window.__lungeFirebaseReady && db) teams=await readFirebaseTeams();
+  else teams=readLocalTeams();
+  teams.sort((a,b)=>String(a.name||"").localeCompare(String(b.name||"")));
+  const currentUser=currentTeamUser();
+  if(!teams.length){
+    list.innerHTML='<div class="team-empty">No teams yet. Be the first to create one! 🏆</div>';
+  }else{
+    list.innerHTML=teams.map(team=>{
+      const count=getTeamMemberCount(team);
+      const max=Number(team.maxMembers||20);
+      const full=count>=max;
+      const id=String(team.id||"").replace(/[^a-zA-Z0-9_-]/g,"");
+      const isOwner=!!(currentUser && (currentUser.isSiteOwner || String(team.ownerUid)===String(currentUser.uid)));
+      const isMember=!!(currentUser && Array.isArray(team.members) && team.members.some(m=>String(m.uid)===String(currentUser.uid)));
+      const isPublic=String(team.visibility||'public').toLowerCase()!=='private';
+      let actionButton='';
+      if(isOwner){
+        actionButton=`<button type="button" class="team-delete-btn" onclick="deleteTeam('${id}')">🗑️ Delete Team</button>`;
+      }else if(isMember){
+        actionButton=`<button type="button" class="team-leave-btn" onclick="leaveTeam('${id}')">🚪 Leave Team</button>`;
+      }else if(isPublic){
+        actionButton=`<button class="team-join" type="button" onclick="joinTeam('${id}')" ${full?'disabled':''}>${full?'Full':'Join'}</button>`;
+      }else{
+        actionButton=`<button type="button" class="team-join" disabled>🔒 Invite Only</button>`;
+      }
+      const badge=isPublic?'<span class="team-visibility-badge public">🌍 Public</span>':'<span class="team-visibility-badge private">🔒 Private</span>';
+      const members=Array.isArray(team.members)?team.members:[];
+      const memberRows=members.length ? members.map(m=>{
+        const memberUid=String(m.uid||'');
+        const memberIsOwner=memberUid===String(team.ownerUid);
+        const role=memberIsOwner?'owner':String(m.role||'member');
+        const kick=(isOwner || canTeamManageMembers(team,currentUser)) && !memberIsOwner ? `<button type="button" class="team-kick-btn" onclick="kickTeamMember('${id}','${encodeURIComponent(memberUid)}')">⛔ Kick</button>` : '';
+        const roleBadge=memberIsOwner?'<span class="team-owner-badge">👑 Owner</span>':`<span class="team-role-badge">${role==='admin'?'🛡️ Admin':(role!=='member'?('🎖️ '+escapeTeamText(role)):'👤 Member')}</span>`;
+        return `<div class="team-member-row"><div class="team-member-name">${escapeTeamText(m.username||'Player')}${roleBadge}</div>${kick}</div>`;
+      }).join('') : '<div class="team-member-row"><div class="team-member-name">No players joined yet.</div></div>';
+      const managePanel=isOwner?`<div id="team-perms-${id}" class="team-perm-panel"><div class="team-perm-title">🛡️ Roles & Permissions</div><select id="team-perm-user-${id}" onchange="renderTeamPermissionEditor('${id}')"><option value="">Select a member</option>${members.filter(m=>String(m.uid)!==String(team.ownerUid)).map(m=>`<option value="${encodeURIComponent(String(m.uid))}">${escapeTeamText(m.username||m.email||'Player')}</option>`).join('')}</select><div id="team-perm-editor-${id}"></div><div class="team-role-create"><input id="team-role-name-${id}" maxlength="20" placeholder="New role name (e.g. Moderator)"><button type="button" onclick="createTeamRole('${id}')">➕ Create Role</button></div><div id="team-role-list-${id}" class="team-role-list"></div></div>`:'';
+      const searchText=String(team.name||'')+' '+String(team.tag||'')+' '+String(team.ownerName||'');
+      return `<div class="team-card" data-team-search="${escapeTeamText(searchText).toLowerCase()}"><div class="team-card-main"><div class="team-name">${team.logoUrl?`<img class="team-logo-card" src="${team.logoUrl}" alt="Team logo" loading="lazy">`:'<span style="display:inline-block;width:42px;height:42px;vertical-align:middle;margin-right:8px;border-radius:11px;background:rgba(255,177,70,.08);text-align:center;padding-top:9px">⚔️</span>'}${escapeTeamText(team.name)} <small>[${escapeTeamText(team.tag||"TEAM")}]</small>${badge}</div><div class="team-meta">👑 ${escapeTeamText(team.ownerName||"Player")} • 👥 ${count}/${max} members</div><div class="team-tools"><button type="button" class="team-members-btn" onclick="toggleTeamMembers('${id}')">👥 Members (${count})</button><button type="button" onclick="openTeamChat('${id}')">💬 Team Messages</button>${isOwner?`<button type="button" class="team-manage-btn" onclick="toggleTeamPermissions('${id}')">🛡️ Permissions</button><button type="button" onclick="inviteToTeam('${id}')">📨 Invite</button>`:''}${actionButton}</div><div id="team-members-${id}" class="team-members-panel">${memberRows}</div>${managePanel}</div></div>`;
+    }).join("");
+  }
+  const countPill=document.getElementById('teamCountPill');
+  if(countPill) countPill.textContent=`${teams.length} team${teams.length===1?'':'s'}`;
+  const search=document.getElementById('teamSearchInput');
+  if(search && search.value) filterTeams(search.value);
+  await renderMyTeams();
+  updateTeamAccess();
+}
+function filterTeams(query){
+  const q=String(query||'').trim().toLowerCase();
+  document.querySelectorAll('#teamList .team-card').forEach(card=>{
+    const hay=card.getAttribute('data-team-search')||'';
+    card.style.display=!q||hay.includes(q)?'':'none';
+  });
+}
+window.filterTeams=filterTeams;
+
+function escapeTeamText(value){
+  return String(value ?? "").replace(/[&<>'"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;","'":"&#39;","\"":"&quot;"}[c]));
+}
+window.escapeTeamText = escapeTeamText;
+window.toggleTeamMembers=function(teamId){
+  const panel=document.getElementById('team-members-'+String(teamId));
+  if(panel){ panel.classList.toggle('open'); if(panel.classList.contains('open')) renderTeamRoles(teamId); }
+};
+
+async function renderMyTeams(){
+  const box=document.getElementById("myTeams"); if(!box) return;
+  const user=currentTeamUser();
+  if(!user){box.innerHTML="";return;}
+  let teams=[];
+  if(window.__lungeFirebaseReady && db){
+    const all=await readFirebaseTeams();
+    teams=all.filter(t=>Array.isArray(t.members) && t.members.some(m=>m.uid===user.uid));
+  }else{
+    teams=readLocalTeams().filter(t=>Array.isArray(t.members) && t.members.some(m=>m.uid===user.uid));
+  }
+  if(!teams.length){box.innerHTML='<div class="my-team-chip">You have not joined any team yet.</div>';return;}
+  box.innerHTML=teams.slice(0,2).map(t=>`<div class="my-team-chip">🏆 <strong>${escapeTeamText(t.name)}</strong> [${escapeTeamText(t.tag||"TEAM")}]</div>`).join("");
+}
+
+function updateTeamAccess(){
+  const user=currentTeamUser();
+  const form=document.getElementById("createTeamForm");
+  const lock=document.getElementById("teamCreateLock");
+  if(!form||!lock) return;
+  const disabled=!user;
+  [...form.elements].forEach(el=>el.disabled=disabled);
+  lock.style.display=disabled?"block":"none";
+}
+
+window.updateTeamAccess = updateTeamAccess;
+window.loadTeams = loadTeams;
+
+window.createTeam=async function(event){
+  event.preventDefault();
+  const user=currentTeamUser();
+  if(!user){setTeamStatus("teamCreateStatus","Please login/register first.");openAuth("login");return;}
+  const name=document.getElementById("teamNameInput").value.trim();
+  const tag=document.getElementById("teamTagInput").value.trim().toUpperCase();
+  const visibility=(document.querySelector("input[name=\"teamVisibility\"]:checked")?.value||"public").toLowerCase()==="private"?"private":"public";
+  let teamLogo=''; const logoInput=document.getElementById('teamLogoInput'); if(logoInput?.files?.[0]) teamLogo=await resizeImageFile(logoInput.files[0],256,.82);
+  if(!name || name.length<3 || name.length>24){setTeamStatus("teamCreateStatus","Team name must be 3-24 characters.");return;}
+  if(!/^[A-Za-z0-9]{2,6}$/.test(tag)){setTeamStatus("teamCreateStatus","Team tag must be 2-6 letters/numbers.");return;}
+  setTeamStatus("teamCreateStatus","Creating team…");
+  try{
+    let existing=window.__lungeFirebaseReady&&db?await readFirebaseTeams():readLocalTeams();
+    if(existing.some(t=>String(t.name||"").toLowerCase()===name.toLowerCase() || String(t.tag||"").toLowerCase()===tag.toLowerCase())) throw new Error("That team name or tag is already taken.");
+    const team={name,tag,visibility,logoUrl:teamLogo,ownerUid:user.uid,ownerName:user.username,maxMembers:20,members:[{uid:user.uid,username:user.username,email:user.email,role:"owner",permissions:{editTeam:true,manageMembers:true,manageChat:true,invitePlayers:true}}],createdAt:new Date().toISOString()};
+    if(window.__lungeFirebaseReady&&db){
+      await addDoc(collection(db,"teams"),team);
+    }else{
+      const teams=readLocalTeams(); team.id="local_"+Date.now(); teams.push(team); localStorage.setItem("lunge_mc_teams",JSON.stringify(teams));
+    }
+    document.getElementById("teamNameInput").value="";document.getElementById("teamTagInput").value="";if(logoInput)logoInput.value='';const lp=document.getElementById('teamLogoPreview');if(lp){lp.src='';lp.classList.remove('show');}const lph=document.getElementById('teamLogoPlaceholder');if(lph)lph.style.display='grid';const publicRadio=document.querySelector("input[name=\"teamVisibility\"][value=\"public\"]");if(publicRadio)publicRadio.checked=true;
+    setTeamStatus("teamCreateStatus","Team created successfully! 🏆",true);
+    await loadTeams();
+  }catch(e){setTeamStatus("teamCreateStatus",e.message||"Could not create team.");}
+};
+
+
+window.deleteTeam=async function(teamId){
+  const user=currentTeamUser();
+  if(!user){setTeamStatus("teamJoinStatus","Please login/register first.");openAuth("login");return;}
+  try{
+    const teams=window.__lungeFirebaseReady&&db?await readFirebaseTeams():readLocalTeams();
+    const team=teams.find(t=>String(t.id)===String(teamId));
+    if(!team) throw new Error("Team not found.");
+    if(!user.isSiteOwner && String(team.ownerUid)!==String(user.uid)) throw new Error("Only the team owner can delete this team.");
+    if(!confirm(`Delete team "${String(team.name||"Team").replace(/"/g,'\\"')}"? This cannot be undone.`)) return;
+    if(window.__lungeFirebaseReady&&db){
+      await deleteDoc(doc(db,"teams",String(team.id)));
+    }else{
+      const local=readLocalTeams().filter(t=>String(t.id)!==String(team.id));
+      localStorage.setItem("lunge_mc_teams",JSON.stringify(local));
+    }
+    if(window.activeTeamChatId && String(window.activeTeamChatId)===String(teamId)){
+      window.activeTeamChatId=null;
+    }
+    setTeamStatus("teamJoinStatus","Team deleted successfully. 🗑️",true);
+    await loadTeams();
+  }catch(e){
+    setTeamStatus("teamJoinStatus",e.message||"Could not delete team.");
+  }
+};
+
+window.leaveTeam=async function(teamId){
+  const user=currentTeamUser();
+  if(!user){setTeamStatus("teamJoinStatus","Please login/register first.");openAuth("login");return;}
+  try{
+    const teams=window.__lungeFirebaseReady&&db?await readFirebaseTeams():readLocalTeams();
+    const team=teams.find(t=>String(t.id)===String(teamId));
+    if(!team) throw new Error("Team not found.");
+    if(String(team.ownerUid)===String(user.uid)) throw new Error("Team owner cannot leave. Delete the team instead.");
+    const members=Array.isArray(team.members)?team.members:[];
+    if(!members.some(m=>String(m.uid)===String(user.uid))){
+      setTeamStatus("teamJoinStatus","You are not a member of this team.");
+      return;
+    }
+    if(!confirm(`Leave team "${String(team.name||"Team").replace(/"/g,'\"')}"?`)) return;
+    const updatedMembers=members.filter(m=>String(m.uid)!==String(user.uid));
+    if(window.__lungeFirebaseReady&&db){
+      await updateDoc(doc(db,"teams",String(team.id)),{members:updatedMembers});
+    }else{
+      team.members=updatedMembers;
+      const local=readLocalTeams().map(t=>String(t.id)===String(team.id)?team:t);
+      localStorage.setItem("lunge_mc_teams",JSON.stringify(local));
+    }
+    if(window.activeTeamChatId && String(window.activeTeamChatId)===String(teamId)) window.activeTeamChatId=null;
+    setTeamStatus("teamJoinStatus",`You left ${team.name||"the team"}. 🚪`,true);
+    await loadTeams();
+  }catch(e){
+    setTeamStatus("teamJoinStatus",e.message||"Could not leave team.");
+  }
+};
+
+window.kickTeamMember=async function(teamId,encodedUid){
+  const user=currentTeamUser();
+  if(!user){setTeamStatus("teamJoinStatus","Please login/register first.");openAuth("login");return;}
+  const targetUid=decodeURIComponent(String(encodedUid||""));
+  try{
+    const teams=window.__lungeFirebaseReady&&db?await readFirebaseTeams():readLocalTeams();
+    const team=teams.find(t=>String(t.id)===String(teamId));
+    if(!team) throw new Error("Team not found.");
+    if(!user.isSiteOwner && String(team.ownerUid)!==String(user.uid)) throw new Error("Only the team owner can kick members.");
+    if(targetUid===String(team.ownerUid)) throw new Error("The team owner cannot be kicked.");
+    const members=Array.isArray(team.members)?team.members:[];
+    const target=members.find(m=>String(m.uid)===targetUid);
+    if(!target) throw new Error("Member is no longer in this team.");
+    if(!confirm(`Kick ${String(target.username||"Player")} from ${String(team.name||"this team")}?`)) return;
+    const updatedMembers=members.filter(m=>String(m.uid)!==targetUid);
+    if(window.__lungeFirebaseReady&&db){
+      await updateDoc(doc(db,"teams",String(team.id)),{members:updatedMembers});
+    }else{
+      const local=readLocalTeams().map(t=>String(t.id)===String(team.id)?{...t,members:updatedMembers}:t);
+      localStorage.setItem("lunge_mc_teams",JSON.stringify(local));
+    }
+    setTeamStatus("teamJoinStatus",`${target.username||"Player"} was kicked from ${team.name||"the team"}.`,true);
+    if(window.activeTeamChatId && String(window.activeTeamChatId)===String(teamId) && String(targetUid)===String(user.uid)) window.activeTeamChatId=null;
+    await loadTeams();
+    if(activeTeamChatId && String(activeTeamChatId)===String(teamId)) await loadTeamMessages();
+  }catch(e){setTeamStatus("teamJoinStatus",e.message||"Could not kick member.");}
+};
+
+window.toggleTeamPermissions=function(teamId){
+  const panel=document.getElementById('team-perms-'+String(teamId));
+  if(panel) panel.classList.toggle('open');
+};
+window.renderTeamPermissionEditor=function(teamId){
+  const select=document.getElementById('team-perm-user-'+String(teamId));
+  const box=document.getElementById('team-perm-editor-'+String(teamId)); if(!select||!box)return;
+  const uid=decodeURIComponent(select.value||''); if(!uid){box.innerHTML='';return;}
+  (async()=>{
+    const teams=window.__lungeFirebaseReady&&db?await readFirebaseTeams():readLocalTeams();
+    const team=teams.find(t=>String(t.id)===String(teamId)); const m=(team?.members||[]).find(x=>String(x.uid)===uid);
+    if(!m){box.innerHTML='';return;}
+    const p=m.permissions||{};
+    const roles=teamRoles(team); box.innerHTML=`<div class="team-perm-row"><label>Role</label><select id="perm-role-${teamId}"><option value="member">Member</option>${roles.map(r=>`<option value="${encodeURIComponent(String(r.name))}" ${String(m.role||'member')===String(r.name)?'selected':''}>${escapeTeamText(r.name)}</option>`).join('')}</select></div><div class="team-perm-row"><label>Edit team details</label><input id="perm-editTeam-${teamId}" type="checkbox" ${p.editTeam?'checked':''}></div><div class="team-perm-row"><label>Manage / kick members</label><input id="perm-manageMembers-${teamId}" type="checkbox" ${p.manageMembers?'checked':''}></div><div class="team-perm-row"><label>Manage team chat</label><input id="perm-manageChat-${teamId}" type="checkbox" ${p.manageChat?'checked':''}></div><div class="team-perm-row"><label>Invite players</label><input id="perm-invitePlayers-${teamId}" type="checkbox" ${p.invitePlayers?'checked':''}></div><button type="button" class="team-perm-save" onclick="saveTeamMemberPermissions('${teamId}','${encodeURIComponent(uid)}')">💾 Save Permissions</button>`;
+  })();
+};
+window.createTeamRole=async function(teamId){
+  const user=currentTeamUser(); if(!user) return;
+  try{
+    const teams=window.__lungeFirebaseReady&&db?await readFirebaseTeams():readLocalTeams();
+    const team=teams.find(t=>String(t.id)===String(teamId)); if(!team) throw new Error('Team not found.');
+    if(!user.isSiteOwner && String(team.ownerUid)!==String(user.uid)) throw new Error('Only the team owner can create roles.');
+    const input=document.getElementById(`team-role-name-${teamId}`); const name=String(input?.value||'').trim();
+    if(!/^[A-Za-z0-9 _-]{2,20}$/.test(name)) throw new Error('Role name must be 2-20 characters.');
+    const roles=teamRoles(team); if(roles.some(r=>String(r.name).toLowerCase()===name.toLowerCase())) throw new Error('This role already exists.');
+    roles.push({id:'role_'+Date.now(),name,permissions:{editTeam:false,manageMembers:false,manageChat:false,invitePlayers:false}}); team.roles=roles;
+    if(window.__lungeFirebaseReady&&db) await updateDoc(doc(db,'teams',String(team.id)),{roles});
+    else {const local=readLocalTeams().map(t=>String(t.id)===String(team.id)?team:t);localStorage.setItem('lunge_mc_teams',JSON.stringify(local));}
+    if(input) input.value=''; await loadTeams(); setTimeout(()=>{const p=document.getElementById('team-perms-'+String(teamId));if(p)p.classList.add('open');renderTeamRoles(teamId);},60);
+  }catch(e){setTeamStatus('teamJoinStatus',e.message||'Could not create role.');}
+};
+window.renderTeamRoles=async function(teamId){
+  const box=document.getElementById('team-role-list-'+String(teamId)); if(!box)return;
+  const teams=window.__lungeFirebaseReady&&db?await readFirebaseTeams():readLocalTeams(); const team=teams.find(t=>String(t.id)===String(teamId)); if(!team)return;
+  const roles=teamRoles(team); box.innerHTML=roles.length?roles.map(r=>`<div class="team-role-item"><span>🎖️ ${escapeTeamText(r.name)}</span><small>${Object.values(r.permissions||{}).filter(Boolean).length} permissions</small></div>`).join(''):'<div class="team-role-empty">No custom roles yet.</div>';
+};
+
+window.saveTeamMemberPermissions=async function(teamId,encodedUid){
+  const user=currentTeamUser(); if(!user)return;
+  try{
+    const teams=window.__lungeFirebaseReady&&db?await readFirebaseTeams():readLocalTeams();
+    const team=teams.find(t=>String(t.id)===String(teamId)); if(!team)throw new Error('Team not found.');
+    if(!user.isSiteOwner && String(team.ownerUid)!==String(user.uid))throw new Error('Only the team owner can change permissions.');
+    const uid=decodeURIComponent(encodedUid); const members=Array.isArray(team.members)?team.members:[];
+    const target=members.find(m=>String(m.uid)===uid); if(!target)throw new Error('Member not found.');
+    if(String(target.uid)===String(team.ownerUid)) throw new Error('Owner permissions are always enabled.');
+    target.permissions={editTeam:!!document.getElementById(`perm-editTeam-${teamId}`)?.checked,manageMembers:!!document.getElementById(`perm-manageMembers-${teamId}`)?.checked,manageChat:!!document.getElementById(`perm-manageChat-${teamId}`)?.checked,invitePlayers:!!document.getElementById(`perm-invitePlayers-${teamId}`)?.checked};
+    const roleEl=document.getElementById(`perm-role-${teamId}`); const chosenRole=roleEl?decodeURIComponent(roleEl.value||'member'):'member';
+    const hasPermission=Object.values(target.permissions).some(Boolean); target.role=chosenRole && chosenRole!=='member' ? chosenRole : (hasPermission?'admin':'member');
+    if(window.__lungeFirebaseReady&&db) await updateDoc(doc(db,'teams',String(team.id)),{members});
+    else {const local=readLocalTeams().map(t=>String(t.id)===String(team.id)?team:t);localStorage.setItem('lunge_mc_teams',JSON.stringify(local));}
+    setTeamStatus('teamJoinStatus',`Permissions updated for ${target.username||'member'}.`,true); await loadTeams();
+    setTimeout(()=>{const p=document.getElementById('team-perms-'+String(teamId));if(p)p.classList.add('open');const sel=document.getElementById('team-perm-user-'+String(teamId));if(sel){sel.value=encodeURIComponent(uid);renderTeamPermissionEditor(teamId);}},50);
+  }catch(e){setTeamStatus('teamJoinStatus',e.message||'Could not update permissions.');}
+};
+window.joinTeam=async function(teamId){
+  const user=currentTeamUser();
+  if(!user){setTeamStatus("teamJoinStatus","Please login/register first.");openAuth("login");return;}
+  setTeamStatus("teamJoinStatus","Joining team…");
+  try{
+    const teams=window.__lungeFirebaseReady&&db?await readFirebaseTeams():readLocalTeams();
+    const team=teams.find(t=>String(t.id)===String(teamId));
+    if(!team) throw new Error("Team not found.");
+    const members=Array.isArray(team.members)?team.members:[];
+    const isPublic=String(team.visibility||"public").toLowerCase()!=="private";
+    if(!isPublic && String(team.ownerUid)!==String(user.uid)){throw new Error("This is a private team. Ask the owner for an invite.");}
+    if(members.some(m=>m.uid===user.uid)){setTeamStatus("teamJoinStatus","You are already in this team.");return;}
+    const myTeams=teams.filter(t=>Array.isArray(t.members)&&t.members.some(m=>m.uid===user.uid));
+    if(myTeams.length>=2) throw new Error("You can join a maximum of 2 teams.");
+    if(members.length>=Number(team.maxMembers||20)) throw new Error("This team is full.");
+    const member={uid:user.uid,username:user.username,email:user.email,role:"member",permissions:{editTeam:false,manageMembers:false,manageChat:false,invitePlayers:false}};
+    if(window.__lungeFirebaseReady&&db){
+      await updateDoc(doc(db,"teams",team.id),{members:arrayUnion(member)});
+    }else{
+      team.members.push(member);
+      const local=readLocalTeams().map(t=>String(t.id)===String(team.id)?team:t);
+      localStorage.setItem("lunge_mc_teams",JSON.stringify(local));
+    }
+    setTeamStatus("teamJoinStatus",`Joined ${team.name}! 🎉`,true);
+    await loadTeams();
+  }catch(e){setTeamStatus("teamJoinStatus",e.message||"Could not join team.");}
+};
+
+window.addEventListener("load",()=>setTimeout(loadTeams,250));
+
+window.logoutUser = async function() {
+  if (auth) {
+    await signOut(auth);
+    return;
+  }
+  localStorage.removeItem("lunge_mc_active_user");
+  updateLocalAuthUI();
+  if(window.updateTeamAccess) updateTeamAccess();
+  if(window.loadTeams) loadTeams();
+  showWelcome("Player", false);
+};
+</script>
+
+<script>
+
+function copyServerAddress(id,button){
+  const value=document.getElementById(id)?.textContent?.trim();
+  if(!value) return;
+  const done=()=>{const old=button.textContent;button.textContent='Copied!';setTimeout(()=>button.textContent=old,1400);};
+  if(navigator.clipboard && window.isSecureContext){navigator.clipboard.writeText(value).then(done).catch(()=>fallbackCopy(value,done));}
+  else{fallbackCopy(value,done);}
+}
+function fallbackCopy(value,done){
+  const field=document.createElement('textarea');field.value=value;field.style.position='fixed';field.style.opacity='0';document.body.appendChild(field);field.select();
+  try{if(document.execCommand('copy')) done();}catch(e){}
+  field.remove();
+}
+
+async function updatePlayerCount(){
+  const el=document.getElementById('player-count');
+  if(!el) return;
+  try{
+    const res=await fetch('https://api.mcsrvstat.us/3/play.lungemc.fun:20005',{cache:'no-store'});
+    if(!res.ok) throw new Error('status');
+    const data=await res.json();
+    el.textContent=(data.players && typeof data.players.online==='number') ? data.players.online : 0;
+  }catch(e){
+    el.textContent='0';
+  }
+}
+updatePlayerCount();
+setInterval(updatePlayerCount,30000);
+</script>
+
+<div id="lungeWelcome" class="lunge-welcome" role="status" aria-live="polite">
+  <strong id="lungeWelcomeTitle">Welcome to Lunge MC! 🎮</strong>
+  <span id="lungeWelcomeText">You are successfully logged in.</span>
+</div>
+
+
+<script id="site-sound-script">
+(function(){
+  const SOUND_KEY="lunge_mc_sound_enabled";
+  let audioCtx=null;
+
+  function soundEnabled(){
+    return localStorage.getItem(SOUND_KEY)!=="0";
+  }
+
+  function updateSoundButtons(){
+    const on=soundEnabled();
+    const main=document.getElementById("soundToggleBtn");
+    const menu=document.getElementById("soundMenuBtn");
+    if(main){
+      main.textContent=on?"🔊 Sound ON":"🔇 Sound OFF";
+      main.classList.toggle("sound-off",!on);
+      main.setAttribute("aria-pressed",on?"true":"false");
+    }
+    if(menu){
+      menu.textContent=on?"🔊 Sound: ON":"🔇 Sound: OFF";
+      menu.classList.toggle("sound-off",!on);
+      menu.setAttribute("aria-pressed",on?"true":"false");
+    }
+  }
+
+  function playClickSound(){
+    if(!soundEnabled()) return;
+    try{
+      audioCtx=audioCtx || new (window.AudioContext||window.webkitAudioContext)();
+      if(audioCtx.state==="suspended") audioCtx.resume();
+      const now=audioCtx.currentTime;
+      const osc=audioCtx.createOscillator();
+      const gain=audioCtx.createGain();
+      osc.type="sine";
+      osc.frequency.setValueAtTime(680,now);
+      osc.frequency.exponentialRampToValueAtTime(980,now+0.045);
+      gain.gain.setValueAtTime(0.0001,now);
+      gain.gain.exponentialRampToValueAtTime(0.055,now+0.008);
+      gain.gain.exponentialRampToValueAtTime(0.0001,now+0.075);
+      osc.connect(gain); gain.connect(audioCtx.destination);
+      osc.start(now); osc.stop(now+0.08);
+    }catch(e){}
+  }
+
+  window.toggleSiteSound=function(){
+    const next=!soundEnabled();
+    localStorage.setItem(SOUND_KEY,next?"1":"0");
+    updateSoundButtons();
+    if(next) playClickSound();
+  };
+  window.updateSoundButtons=updateSoundButtons;
+
+  document.addEventListener("click",function(e){
+    const target=e.target && e.target.closest ? e.target.closest("button,a,[role='button'],input[type='checkbox'],select") : null;
+    if(!target) return;
+    if(target.id==="soundToggleBtn" || target.id==="soundMenuBtn") return;
+    playClickSound();
+  },true);
+
+  document.addEventListener("DOMContentLoaded",updateSoundButtons);
+  window.addEventListener("load",updateSoundButtons);
+})();
+</script>
+
+<script>
+
+function toggleNavMenu(){
+  const menu = document.getElementById('mainNavLinks');
+  const button = document.getElementById('navMenuToggle');
+  if(!menu || !button) return;
+  const open = menu.classList.toggle('menu-open');
+  button.classList.toggle('open', open);
+  button.setAttribute('aria-expanded', open ? 'true' : 'false');
+  button.setAttribute('aria-label', open ? 'Close navigation menu' : 'Open navigation menu');
+}
+
+document.addEventListener('click', function(event){
+  const menu = document.getElementById('mainNavLinks');
+  const button = document.getElementById('navMenuToggle');
+  const wrap = document.querySelector('.nav-menu-wrap');
+  if(!menu || !button || !menu.classList.contains('menu-open')) return;
+  if(!wrap || !wrap.contains(event.target)){
+    menu.classList.remove('menu-open');
+    button.classList.remove('open');
+    button.setAttribute('aria-expanded','false');
+    button.setAttribute('aria-label','Open navigation menu');
+  }
+});
+
+document.querySelectorAll('#mainNavLinks a').forEach(function(link){
+  link.addEventListener('click', function(){
+    const menu = document.getElementById('mainNavLinks');
+    const button = document.getElementById('navMenuToggle');
+    if(menu && button){
+      menu.classList.remove('menu-open');
+      button.classList.remove('open');
+      button.setAttribute('aria-expanded','false');
+      button.setAttribute('aria-label','Open navigation menu');
+    }
+  });
+});
+</script>
+<script>updateLocalAuthUI();</script>
+
+
+
+<script>
+/* Shared HTML escape helper: available to all scripts, including chat. */
+window.escapeTeamText = window.escapeTeamText || function(value){
+  return String(value ?? "").replace(/[&<>'"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;","\'":"&#39;","\"":"&quot;"}[c]));
+};
+
+/* ===================== AUTH-ONLY GLOBAL CHAT + TEAM MESSAGES/INVITES ===================== */
+let activeTeamChatId=null;
+let globalChatUnsubscribe=null;
+let teamChatUnsubscribe=null;
+function chatUser(){ return window.currentTeamUser ? window.currentTeamUser() : null; }
+function chatDb(){ return window.__lungeDb || null; }
+function chatFs(){ return window.__lungeFirestore || {}; }
+function escChat(v){ return escapeTeamText(v); }
+function chatStore(){ return JSON.parse(localStorage.getItem("lunge_mc_global_chat")||"[]"); }
+function saveChatStore(v){ localStorage.setItem("lunge_mc_global_chat",JSON.stringify(v.slice(-100))); }
+function chatTime(ts){ try{return new Date(ts).toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'});}catch(e){return '';} }
+function setChatStatus(id,msg,ok){const e=document.getElementById(id);if(e){e.textContent=msg||'';e.classList.toggle('success',!!ok);}}
+function localProfileKey(u){ return u ? 'lunge_mc_profile_'+String(u.email||u.uid||'player').toLowerCase() : ''; }
+function getSavedPlayerProfile(u){ try{return u?JSON.parse(localStorage.getItem(localProfileKey(u))||'{}'):{};}catch(e){return {};}}
+function cleanSkinUrl(url){
+  const u=String(url||'').trim();
+  return /^https?:\/\//i.test(u) ? u : '';
+}
+function playerSkinUrl(username, custom){
+  const c=cleanSkinUrl(custom); if(c) return c;
+  const n=encodeURIComponent(String(username||'Player').trim());
+  return 'https://mc-heads.net/avatar/'+n+'/64';
+}
+function playerFullSkinUrl(username, custom){
+  const c=cleanSkinUrl(custom); if(c) return c;
+  const n=encodeURIComponent(String(username||'Player').trim());
+  return 'https://mc-heads.net/body/'+n+'/200';
+}
+function playerRawSkinUrl(username){
+  const n=encodeURIComponent(String(username||'Player').trim());
+  return 'https://mc-heads.net/skin/'+n;
+}
+function chatSkin(m){ return playerSkinUrl(m.skinUsername || m.username, m.skinUrl || m.customSkinUrl); }
+function chatSkinFallback(username){ return 'https://mc-heads.net/avatar/'+encodeURIComponent(username||'Player')+'/64'; }
+function chatSkinName(m){ return String(m.skinUsername || m.username || 'Player'); }
+function previewPlayerSkin(){
+  const u=chatUser(); if(!u){openAuth('login');return;}
+  const name=(document.getElementById('skinPlayerName')?.value||u.username||'').trim();
+  if(!name){setChatStatus('globalChatStatus','Player name डालें.');return;}
+  if(!/^[A-Za-z0-9_\.]{3,16}$/.test(name)){setChatStatus('globalChatStatus','Valid Minecraft player name डालें (3–16 characters).');return;}
+  const saved=getSavedPlayerProfile(u); const custom=(document.getElementById('customSkinUrl')?.value||saved.customSkinUrl||'').trim();
+  const img=document.getElementById('skinPreviewImg'), label=document.getElementById('skinPreviewName'), st=document.getElementById('skinPreviewStatus');
+  if(img){
+    img.onerror=function(){
+      this.onerror=null;
+      this.src=playerRawSkinUrl(name);
+      if(st) st.textContent='Skin image load नहीं हुई, raw Minecraft skin दिखा रहा हूँ.';
+    };
+    img.src=playerFullSkinUrl(name,custom);
+  }
+  if(label) label.textContent=name;
+  if(st) st.textContent=custom?'Custom skin/image set है.':'Minecraft Premium skin loaded है.';
+}
+window.previewPlayerSkin=previewPlayerSkin;
+async function saveCustomSkin(){
+  const u=chatUser(); if(!u){openAuth('login');return;}
+  let name=(document.getElementById('skinPlayerName')?.value||u.username||'').trim();
+  let url=(document.getElementById('customSkinUrl')?.value||'').trim();
+  /* URL is optional. If the second box contains another Minecraft username,
+     treat it as the username instead of showing a URL error. */
+  if(url && /^[A-Za-z0-9_\.]{3,16}$/.test(url) && !/^https?:\/\//i.test(url)){
+    name=url;
+    url='';
+    const nameInput=document.getElementById('skinPlayerName'); if(nameInput) nameInput.value=name;
+    const urlInput=document.getElementById('customSkinUrl'); if(urlInput) urlInput.value='';
+  }
+  if(!name){setChatStatus('globalChatStatus','Player name डालें.');return;}
+  if(!/^[A-Za-z0-9_\.]{3,16}$/.test(name)){setChatStatus('globalChatStatus','Valid Minecraft player name डालें (3–16 characters).');return;}
+  if(url && !/^https?:\/\//i.test(url)){
+    setChatStatus('globalChatStatus','Custom URL गलत है. URL http:// या https:// से शुरू होना चाहिए. या URL खाली छोड़कर Premium player name इस्तेमाल करें.');
+    return;
+  }
+  url=cleanSkinUrl(url); const profile={username:name,customSkinUrl:url}; localStorage.setItem(localProfileKey(u),JSON.stringify(profile));
+  try{ if(window.__lungeFirebaseReady&&chatDb()){ const ref=chatFs().doc(chatDb(),'players',String(u.uid)); await chatFs().setDoc(ref,{uid:u.uid,email:u.email||'',username:name,customSkinUrl:url},{merge:true}); } }catch(e){console.warn('Skin profile save failed',e);}
+  const img=document.getElementById('skinPreviewImg'); if(img) img.src=playerFullSkinUrl(name,url); const label=document.getElementById('skinPreviewName'); if(label) label.textContent=name; const st=document.getElementById('skinPreviewStatus'); if(st) st.textContent=url?'Custom skin/image saved.':'Minecraft Premium skin saved.';
+  setChatStatus('globalChatStatus','Player skin save हो गई. अब chat messages में यही head/skin दिखेगी. 🧑‍🎮',true);
+}
+window.saveCustomSkin=saveCustomSkin;
+function initSkinProfile(){
+  const u=chatUser(); if(!u)return; const p=getSavedPlayerProfile(u);
+  const n=document.getElementById('skinPlayerName'), c=document.getElementById('customSkinUrl'); if(n)n.value=p.username||u.username||''; if(c)c.value=p.customSkinUrl||''; previewPlayerSkin();
+}
+
+async function resizeImageFile(file,maxSize=640,quality=.78){
+  if(!file || !/^image\/(png|jpe?g|webp)$/i.test(file.type)) throw new Error('Only JPG, PNG or WebP images are allowed.');
+  if(file.size>4*1024*1024) throw new Error('Image is too large. Keep it under 4 MB.');
+  const data=await new Promise((resolve,reject)=>{const fr=new FileReader();fr.onload=()=>resolve(fr.result);fr.onerror=reject;fr.readAsDataURL(file);});
+  return await new Promise((resolve,reject)=>{const img=new Image();img.onload=()=>{const scale=Math.min(1,maxSize/Math.max(img.width,img.height));const c=document.createElement('canvas');c.width=Math.max(1,Math.round(img.width*scale));c.height=Math.max(1,Math.round(img.height*scale));const ctx=c.getContext('2d');ctx.drawImage(img,0,0,c.width,c.height);resolve(c.toDataURL('image/jpeg',quality));};img.onerror=reject;img.src=data;});
+}
+async function previewTeamLogo(input){const ph=document.getElementById('teamLogoPlaceholder'),img=document.getElementById('teamLogoPreview');if(!input?.files?.[0])return;try{const data=await resizeImageFile(input.files[0],256,.82);img.src=data;img.classList.add('show');if(ph)ph.style.display='none';}catch(e){input.value='';setTeamStatus('teamCreateStatus',e.message||'Could not load team image.');}}
+window.previewTeamLogo=previewTeamLogo;
+async function previewChatImage(input,previewId){const id=previewId||(input?.id==='teamChatImage'?'teamChatImagePreview':'globalChatImagePreview');try{if(!input?.files?.[0])return;const data=await resizeImageFile(input.files[0],640,.78);input.dataset.imageData=data;const box=document.getElementById(id),img=box?.querySelector('img');if(img)img.src=data;if(box)box.classList.add('show');}catch(e){if(input)input.value='';setChatStatus(input?.id==='teamChatImage'?'teamChatStatus':'globalChatStatus',e.message||'Could not attach image.');}}
+window.previewChatImage=previewChatImage;
+function clearChatImage(inputId='globalChatImage'){const input=document.getElementById(inputId),box=document.getElementById(inputId==='teamChatImage'?'teamChatImagePreview':'globalChatImagePreview');if(input){input.value='';delete input.dataset.imageData;}if(box)box.classList.remove('show');}
+window.clearChatImage=clearChatImage;
+async function registeredChatPlayers(){let out=[];try{const accounts=JSON.parse(localStorage.getItem('lunge_mc_accounts')||'{}');out=Object.values(accounts).map(a=>({username:a.username||a.gameName,email:a.email||''})).filter(x=>x.username);}catch(e){}if(window.__lungeFirebaseReady&&chatDb()){try{const snap=await chatFs().getDocs(chatFs().collection(chatDb(),'players'));snap.docs.forEach(d=>{const x=d.data();if(x.username)out.push({username:x.username,email:x.email||''});});}catch(e){}}const seen=new Set();return out.filter(x=>{const k=String(x.username).toLowerCase();if(seen.has(k))return false;seen.add(k);return true;});}
+async function setupMentionBox(inputId,listId){const input=document.getElementById(inputId),list=document.getElementById(listId);if(!input||!list||input.dataset.mentionReady)return;input.dataset.mentionReady='1';input.addEventListener('input',async()=>{const v=input.value,match=v.match(/(?:^|\s)@([A-Za-z0-9_.]{0,16})$/);if(!match){list.classList.remove('show');return;}const q=match[1].toLowerCase(),players=(await registeredChatPlayers()).filter(x=>String(x.username).toLowerCase().includes(q)).slice(0,8);list.innerHTML=players.map(x=>`<div class="team-mention-item" data-name="${escChat(x.username)}">@${escChat(x.username)}</div>`).join('');list.classList.toggle('show',!!players.length);list.querySelectorAll('.team-mention-item').forEach(el=>el.onclick=()=>{input.value=input.value.replace(/(?:^|\s)@[A-Za-z0-9_.]{0,16}$/,' @'+el.dataset.name+' ');list.classList.remove('show');input.focus();});});}
+function renderChatText(text){return escChat(text||'').replace(/(^|\s)@([A-Za-z0-9_.]{3,16})\b/g,'$1<span class="chat-mention">@$2</span>');}
+function renderGlobalChat(messages){
+  const area=document.getElementById('globalChatArea'); if(!area) return;
+  const u=chatUser();
+  if(!u){area.innerHTML='<div class="chat-login-lock">🔐 Please login or register to use chat.<br><button type="button" onclick="openAuth(\'login\')" style="margin-top:10px">Login / Register</button></div>';return;}
+  const list=(messages||chatStore()).slice(-100);
+  area.innerHTML='<div class="chat-messages" id="globalChatMessages">'+(list.length?list.map(m=>`<div class="chat-msg"><img class="chat-avatar" src="${chatSkin(m)}" alt="${escChat(chatSkinName(m))}" onerror="this.onerror=null;this.src=chatSkinFallback('${escChat(chatSkinName(m))}')"><div class="chat-msg-body"><div class="chat-msg-head"><b>${escChat(m.username||'Player')}</b><small>${chatTime(m.createdAt)}</small></div><p>${renderChatText(m.text)}</p></div>${m.imageUrl?`<img class="chat-msg-image" src="${m.imageUrl}" alt="Shared image" loading="lazy">`:''}</div></div>`).join(''):'<div class="chat-login-lock">No messages yet. Start the conversation! 💬</div>')+'</div><div class="chat-compose"><button class="chat-attach-btn" type="button" onclick="document.getElementById('globalChatImage').click()">📷</button><input id="globalChatInput" maxlength="500" placeholder="Write a message…"><button class="chat-send" type="button" onclick="sendGlobalMessage()">Send</button><input id="globalChatImage" type="file" accept="image/png,image/jpeg,image/webp" hidden onchange="previewChatImage(this)"><div id="globalMentionList" class="team-mention-list"></div></div><div id="globalChatImagePreview" class="chat-image-preview"><img id="globalChatImageThumb"><span>Photo attached</span><button type="button" onclick="clearChatImage()">✕</button></div><div id="globalChatStatus" class="chat-status"></div>';
+  setupMentionBox('globalChatInput','globalMentionList');
+  const input=document.getElementById('globalChatInput'); if(input){ input.addEventListener('keydown',e=>{if(e.key==='Enter')sendGlobalMessage();}); input.addEventListener('input',()=>{const s=document.getElementById('globalChatStatus'); if(s && input.value.length>470) s.textContent=`${500-input.value.length} characters left`;}); }
+  const box=document.getElementById('globalChatMessages'); if(box) box.scrollTop=box.scrollHeight;
+  renderMyInvites();
+}
+async function loadGlobalChat(){
+  if(globalChatUnsubscribe){try{globalChatUnsubscribe();}catch(e){}globalChatUnsubscribe=null;}
+  if(!chatUser()){renderGlobalChat([]);return;}
+  if(window.__lungeFirebaseReady&&chatDb()){
+    try{
+      const q=chatFs().query(chatFs().collection(chatDb(),'globalChat'),chatFs().orderBy('createdAt','asc'));
+      globalChatUnsubscribe=chatFs().onSnapshot(q,(snap)=>{
+        renderGlobalChat(snap.docs.map(d=>({id:d.id,...d.data()})));
+      },(e)=>{console.warn('Global chat realtime load failed',e);setChatStatus('globalChatStatus','Shared chat connection failed. Check Firebase Firestore rules/config.');});
+      return;
+    }catch(e){console.warn('Global chat load failed',e);}
+  }
+  renderGlobalChat(chatStore());
+}
+window.sendGlobalMessage=async function(){
+  const u=chatUser(), input=document.getElementById('globalChatInput'); if(!u){openAuth('login');return;} if(!input||!input.value.trim())return;
+  const p=getSavedPlayerProfile(u); const image=document.getElementById('globalChatImage')?.dataset.imageData||''; if(!input.value.trim()&&!image)return; const msg={uid:u.uid,username:u.username,skinUsername:p.username||u.username,skinUrl:p.customSkinUrl||'',text:input.value.trim(),imageUrl:image,createdAt:new Date().toISOString()}; input.value=''; clearChatImage();
+  try{if(window.__lungeFirebaseReady&&chatDb()) await chatFs().addDoc(chatFs().collection(chatDb(),'globalChat'),msg); else {const a=chatStore();a.push(msg);saveChatStore(a);} setChatStatus('globalChatStatus','Message sent.',true); await loadGlobalChat();}catch(e){setChatStatus('globalChatStatus',e.message||'Could not send message.');}
+};
+window.openTeamChat=async function(teamId){
+  const u=chatUser(); if(!u){openAuth('login');return;}
+  let teams=window.__lungeFirebaseReady&&chatDb()?await window.readFirebaseTeams():window.readLocalTeams(); const t=teams.find(x=>String(x.id)===String(teamId)); if(!t)return;
+  const isMember=Array.isArray(t.members)&&t.members.some(m=>m.uid===u.uid); if(!isMember){setTeamStatus('teamJoinStatus','Join this team first to use team messages.');return;}
+  activeTeamChatId=String(teamId); setupMentionBox('teamChatInput','teamMentionList'); document.getElementById('teamChatTitle').textContent='💬 '+(t.name||'Team')+' Messages'; document.getElementById('teamChatModal').classList.add('show'); await loadTeamMessages();
+};
+window.closeTeamChat=function(){if(teamChatUnsubscribe){try{teamChatUnsubscribe();}catch(e){}teamChatUnsubscribe=null;}activeTeamChatId=null;document.getElementById('teamChatModal')?.classList.remove('show');};
+async function loadTeamMessages(){
+  if(teamChatUnsubscribe){try{teamChatUnsubscribe();}catch(e){}teamChatUnsubscribe=null;}
+  if(!activeTeamChatId)return;
+  const u=chatUser();
+  if(!u){return;}
+  let teams=window.__lungeFirebaseReady&&chatDb()?await window.readFirebaseTeams():window.readLocalTeams();
+  const team=teams.find(x=>String(x.id)===String(activeTeamChatId));
+  const isMember=!!team&&Array.isArray(team.members)&&team.members.some(m=>String(m.uid)===String(u.uid));
+  if(!isMember){
+    const box=document.getElementById('teamChatList');
+    if(box)box.innerHTML='<div class="chat-login-lock">🔒 Only members of this team can view team messages.</div>';
+    return;
+  }
+  if(window.__lungeFirebaseReady&&chatDb()){
+    try{
+      const q=chatFs().query(chatFs().collection(chatDb(),'teamMessages'),chatFs().where('teamId','==',String(activeTeamChatId)));
+      teamChatUnsubscribe=chatFs().onSnapshot(q,(snap)=>{
+        const messages=snap.docs.map(d=>({id:d.id,...d.data()})).sort((a,b)=>new Date(a.createdAt||0)-new Date(b.createdAt||0));
+        renderTeamMessages(messages);
+      },(e)=>{console.warn('Team chat realtime load failed',e);});
+      return;
+    }catch(e){console.warn(e);}
+  }
+  const messages=JSON.parse(localStorage.getItem('lunge_mc_team_messages_'+activeTeamChatId)||'[]');
+  renderTeamMessages(messages);
+}
+function renderTeamMessages(messages){
+  const box=document.getElementById('teamChatList'); if(!box)return;
+  box.innerHTML=messages.slice(-100).map(m=>`<div class="team-chat-msg"><img class="chat-avatar" src="${chatSkin(m)}" alt="${escChat(chatSkinName(m))}" onerror="this.onerror=null;this.src=chatSkinFallback('${escChat(chatSkinName(m))}')"><div class="chat-msg-body"><div class="chat-msg-head"><b>${escChat(m.username||'Player')}</b><span style="color:#647d95">${chatTime(m.createdAt)}</span></div><div>${renderChatText(m.text)}</div>${m.imageUrl?`<img class="chat-msg-image" src="${m.imageUrl}" alt="Shared image" loading="lazy">`:''}</div></div>`).join('')||'<div class="chat-login-lock">No team messages yet.</div>';
+  box.scrollTop=box.scrollHeight;
+}
+window.sendTeamMessage=async function(){
+  const u=chatUser(), input=document.getElementById('teamChatInput'); if(!u||!activeTeamChatId){openAuth('login');return;} if(!input||!input.value.trim())return;
+  let teams=window.__lungeFirebaseReady&&chatDb()?await window.readFirebaseTeams():window.readLocalTeams(); const t=teams.find(x=>String(x.id)===activeTeamChatId); if(!t||!Array.isArray(t.members)||!t.members.some(m=>m.uid===u.uid)){setChatStatus('teamChatStatus','Only team members can send messages.');return;}
+  const p=getSavedPlayerProfile(u); const image=document.getElementById('teamChatImage')?.dataset.imageData||''; if(!input.value.trim()&&!image)return; const msg={teamId:activeTeamChatId,uid:u.uid,username:u.username,skinUsername:p.username||u.username,skinUrl:p.customSkinUrl||'',text:input.value.trim(),imageUrl:image,createdAt:new Date().toISOString()}; input.value=''; clearChatImage('teamChatImage');
+  try{if(window.__lungeFirebaseReady&&chatDb())await chatFs().addDoc(chatFs().collection(chatDb(),'teamMessages'),msg);else{const k='lunge_mc_team_messages_'+activeTeamChatId,a=JSON.parse(localStorage.getItem(k)||'[]');a.push(msg);localStorage.setItem(k,JSON.stringify(a.slice(-100)));}await loadTeamMessages();}catch(e){setChatStatus('teamChatStatus',e.message||'Could not send team message.');}
+};
+window.inviteToTeam=async function(teamId){
+  const u=chatUser();
+  if(!u){openAuth('login');return;}
+  let teams=window.__lungeFirebaseReady&&chatDb()?await window.readFirebaseTeams():window.readLocalTeams();
+  const t=teams.find(x=>String(x.id)===String(teamId));
+  if(!t)return;
+  if(t.ownerUid!==u.uid){
+    setTeamStatus('teamJoinStatus','Only the team owner can send invites.');
+    return;
+  }
+  activeTeamChatId=String(teamId);
+  const title=document.getElementById('teamChatTitle');
+  const subtitle=document.getElementById('teamChatSubtitle');
+  if(title) title.textContent='📨 Invite • '+(t.name||'Team');
+  if(subtitle) subtitle.textContent='Invite a player by their Minecraft username to join '+(t.name||'this team')+'.';
+  document.getElementById('teamChatModal')?.classList.add('show');
+  const input=document.getElementById('teamInvitePlayer');
+  if(input){input.value='';input.focus();}
+  await loadTeamMessages();
+};
+
+window.sendTeamInviteFromModal=async function(){
+  const u=chatUser(), input=document.getElementById('teamInvitePlayer');
+  if(!u||!activeTeamChatId||!input?.value.trim())return;
+  let teams=window.__lungeFirebaseReady&&chatDb()?await window.readFirebaseTeams():window.readLocalTeams();
+  const t=teams.find(x=>String(x.id)===activeTeamChatId);
+  if(!t)return;
+  if(t.ownerUid!==u.uid){setChatStatus('teamChatStatus','Only the team owner can send invites.');return;}
+  const playerName=input.value.trim();
+  if(!/^[A-Za-z0-9_]{3,16}$/.test(playerName)){
+    setChatStatus('teamChatStatus','Valid Minecraft player name डालें (3-16 characters).');return;
+  }
+  if(Array.isArray(t.members)&&t.members.some(m=>String(m.username||'').toLowerCase()===playerName.toLowerCase())){
+    setChatStatus('teamChatStatus','यह player पहले से टीम में है.');return;
+  }
+  try{
+    let targetUid='', targetEmail='';
+    if(window.__lungeFirebaseReady&&chatDb()){
+      const snap=await chatFs().getDocs(chatFs().collection(chatDb(),'players'));
+      const found=snap.docs.map(d=>({id:d.id,...d.data()})).find(p=>String(p.username||'').toLowerCase()===playerName.toLowerCase());
+      if(!found)throw new Error('इस player name से कोई registered account नहीं मिला.');
+      targetUid=found.uid||found.id; targetEmail=found.email||'';
+    }else{
+      const accounts=JSON.parse(localStorage.getItem('lunge_mc_accounts')||'{}');
+      const found=Object.values(accounts).find(a=>String(a.username||'').toLowerCase()===playerName.toLowerCase());
+      if(!found)throw new Error('इस player name से कोई registered account नहीं मिला.');
+      targetUid='local:'+found.email; targetEmail=found.email||'';
+    }
+    const invite={id:'inv_'+Date.now()+'_'+Math.random().toString(36).slice(2,8),teamId:activeTeamChatId,teamName:t.name||'Team',teamTag:t.tag||'TEAM',fromUid:u.uid,fromName:u.username||'Player',toUid:targetUid,toEmail:targetEmail,toUsername:playerName,status:'pending',createdAt:new Date().toISOString()};
+    if(window.__lungeFirebaseReady&&chatDb())await chatFs().addDoc(chatFs().collection(chatDb(),'teamInvites'),invite);
+    else{const k='lunge_mc_team_invites',a=JSON.parse(localStorage.getItem(k)||'[]');a.push(invite);localStorage.setItem(k,JSON.stringify(a.slice(-100)));}
+    input.value='';
+    setChatStatus('teamChatStatus','Invite sent to '+playerName+' for team '+(t.name||'Team')+'! 📨',true);
+    await renderMyInvites();
+  }catch(e){setChatStatus('teamChatStatus',e.message||'Could not send invite.');}
+};
+
+async function renderMyInvites(){
+  const box=document.getElementById('myTeamInvites');
+  const u=chatUser();
+  if(!box)return;
+  if(!u){box.innerHTML='';return;}
+  let invites=[];
+  if(window.__lungeFirebaseReady&&chatDb()){
+    try{
+      const snap=await chatFs().getDocs(chatFs().collection(chatDb(),'teamInvites'));
+      invites=snap.docs.map(d=>({id:d.id,...d.data()})).filter(i=>i.status==='pending'&&(String(i.toUid)===String(u.uid)||String(i.toUsername||'').toLowerCase()===String(u.username||'').toLowerCase()));
+    }catch(e){console.warn('Invite load failed',e);}
+  }else{
+    invites=JSON.parse(localStorage.getItem('lunge_mc_team_invites')||'[]').filter(i=>i.status==='pending'&&(String(i.toUid)===String(u.uid)||String(i.toEmail||'').toLowerCase()===String(u.email||'').toLowerCase()));
+  }
+  box.innerHTML=invites.length?invites.slice(-10).map(i=>`<div class="team-invite-item">📨 <b>Invite • ${escChat(i.teamName||'Team')}</b><br><small>${escChat(i.fromName||'Player')} invited you to join <b>${escChat(i.teamName||'Team')}</b>.</small><div style="margin-top:8px"><button type="button" onclick="acceptTeamInvite('${escChat(i.id||'')}')">✅ Accept</button> <button type="button" onclick="declineTeamInvite('${escChat(i.id||'')}', '${escChat(i.teamId||'')}')">Decline</button></div></div>`).join(''):'<div class="team-invite-item">No pending team invites.</div>';
+}
+window.renderMyInvites=renderMyInvites;
+
+window.acceptTeamInvite=async function(inviteId){
+  const u=chatUser(); if(!u)return;
+  try{
+    let invites=JSON.parse(localStorage.getItem('lunge_mc_team_invites')||'[]');
+    let invite=null;
+    if(window.__lungeFirebaseReady&&chatDb()){
+      const snap=await chatFs().getDocs(chatFs().collection(chatDb(),'teamInvites')); invite=snap.docs.map(d=>({id:d.id,...d.data()})).find(i=>String(i.id)===String(inviteId));
+    }else invite=invites.find(i=>String(i.id)===String(inviteId));
+    if(!invite)throw new Error('Invite नहीं मिला.');
+    let teams=window.__lungeFirebaseReady&&chatDb()?await window.readFirebaseTeams():window.readLocalTeams();
+    const t=teams.find(x=>String(x.id)===String(invite.teamId)); if(!t)throw new Error('Team नहीं मिली.');
+    if(Array.isArray(t.members)&&t.members.some(m=>m.uid===u.uid)){throw new Error('आप पहले से इस team में हैं.');}
+    const myTeams=teams.filter(x=>Array.isArray(x.members)&&x.members.some(m=>String(m.uid)===String(u.uid)));
+    if(myTeams.length>=2)throw new Error('आप maximum 2 teams join कर सकते हैं.');
+    if(Array.isArray(t.members)&&t.members.length>=Number(t.maxMembers||20))throw new Error('Team full है.');
+    const member={uid:u.uid,email:u.email||'',username:u.username||'Player',joinedAt:new Date().toISOString()};
+    if(window.__lungeFirebaseReady&&chatDb()){
+      await chatFs().updateDoc(chatFs().doc(chatDb(),'teams',String(t.id)),{members:chatFs().arrayUnion(member)});
+      await chatFs().updateDoc(chatFs().doc(chatDb(),'teamInvites',String(inviteId)),{status:'accepted',acceptedAt:new Date().toISOString()});
+    }else{
+      const arr=readLocalTeams().map(x=>String(x.id)===String(t.id)?{...x,members:[...(x.members||[]),member]}:x);localStorage.setItem('lunge_mc_teams',JSON.stringify(arr));
+      invites=invites.map(i=>String(i.id)===String(inviteId)?{...i,status:'accepted',acceptedAt:new Date().toISOString()}:i);localStorage.setItem('lunge_mc_team_invites',JSON.stringify(invites));
+    }
+    setChatStatus('globalChatStatus','You joined '+(t.name||'Team')+'! 🏆',true);await loadTeams();await renderMyInvites();
+  }catch(e){setChatStatus('globalChatStatus',e.message||'Could not accept invite.');}
+};
+window.declineTeamInvite=async function(inviteId){
+  try{
+    if(window.__lungeFirebaseReady&&chatDb())await chatFs().updateDoc(chatFs().doc(chatDb(),'teamInvites',String(inviteId)),{status:'declined',declinedAt:new Date().toISOString()});
+    else{const a=JSON.parse(localStorage.getItem('lunge_mc_team_invites')||'[]');localStorage.setItem('lunge_mc_team_invites',JSON.stringify(a.map(i=>String(i.id)===String(inviteId)?{...i,status:'declined'}:i)));}
+    await renderMyInvites();
+  }catch(e){setChatStatus('globalChatStatus',e.message||'Could not decline invite.');}
+};
+function refreshChatAccess(){
+  renderGlobalChat();renderMyInvites();initSkinProfile();if(window.refreshVoiceAccess) refreshVoiceAccess();if(activeTeamChatId)loadTeamMessages();
+  const notice=document.getElementById('firebaseChatConfigNotice');
+  if(notice) notice.style.display=(window.__lungeFirebaseReady?'none':'block');
+}
+window.refreshChatAccess=refreshChatAccess;
+window.addEventListener('load',()=>setTimeout(refreshChatAccess,350));
+</script>
+
+<script>
+function refreshVoiceAccess(){
+  const lock=document.getElementById('voiceLoginLock'),wrap=document.getElementById('voiceControlsWrap'),notice=document.getElementById('voiceFirebaseNotice');
+  const u=typeof chatUser==='function'?chatUser():null, ok=!!window.__lungeFirebaseReady&&!!window.__lungeDb;
+  if(!lock||!wrap)return;
+  if(!u){lock.style.display='block';wrap.style.display='none';if(window.__lungeVoice?.joined)window.leaveLungeVoice(true)}else{lock.style.display='none';wrap.style.display='block'}
+  if(notice){
+    notice.style.display=ok?'none':'block';
+    if(!ok) notice.textContent='⚠️ Voice is visible for registered users, but real voice between different devices needs your Firebase Web App config + Firestore rules.';
+  }
+  const j=document.getElementById('voiceJoinBtn');
+  if(j){
+    j.disabled=!u;
+    j.title=ok?'Join the live voice room':'Firebase configuration is required for cross-device voice.';
+  }
+}
+window.refreshVoiceAccess=refreshVoiceAccess;
+window.addEventListener('load',()=>setTimeout(refreshVoiceAccess,700));
+</script>
+<script type="module">
+const VOICE_ROOM='main',VC='voiceRooms',ICE={iceServers:[{urls:'stun:stun.l.google.com:19302'},{urls:'stun:stun.cloudflare.com:3478'}]};
+let membersUnsub=null,signalUnsubs=[],subscribed=new Set(),peers=new Map(),stream=null,joined=false,muted=false,deafened=false,heartbeat=null;
+window.__lungeVoice={joined:false,muted:false,deafened:false};
+const db=()=>window.__lungeDb,fs=()=>window.__lungeFirestore,u=()=>typeof chatUser==='function'?chatUser():null;
+const uid=()=>String(u()?.uid||'');
+const esc=x=>String(x??'').replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]));
+const stale=m=>!m?.updatedAt||(Date.now()-new Date(m.updatedAt).getTime()>35000);
+const sigId=(a,b)=>String(a)<String(b)?`${a}__${b}`:`${b}__${a}`;
+const memRef=id=>fs().doc(db(),VC,VOICE_ROOM,'members',String(id));
+const sigRef=(a,b)=>fs().doc(db(),VC,VOICE_ROOM,'signals',sigId(a,b));
+function err(t,ok=false){const e=document.getElementById('voiceError');if(e){e.textContent=t||'';e.classList.toggle('success',ok)}}
+function state(t){const e=document.getElementById('voiceState');if(e)e.textContent=t}
+function render(ms){const box=document.getElementById('voiceParticipants');if(!box)return;ms=(ms||[]).filter(m=>!stale(m));if(!ms.length){box.innerHTML='<div class="voice-empty">Nobody is in the room yet.</div>';return}box.innerHTML=ms.sort((a,b)=>String(a.username).localeCompare(String(b.username))).map(m=>`<div class="voice-person"><div class="voice-person-avatar">${esc((m.username||'P').charAt(0).toUpperCase())}</div><div class="voice-person-info"><div class="voice-person-name">${esc(m.username||'Player')}${String(m.uid)===uid()?' (You)':''}</div><div class="voice-person-status">🟢 Connected</div></div><div class="voice-mic">${String(m.uid)===uid()&&muted?'🔇':'🎙️'}</div></div>`).join('')}
+async function publish(){if(!u()||!db())return;await fs().setDoc(memRef(uid()),{uid:uid(),username:u().username||u().displayName||u().email?.split('@')[0]||'Player',muted:!!muted,deafened:!!deafened,updatedAt:new Date().toISOString()},{merge:true})}
+async function removePresence(){if(!u()||!db())return;try{await fs().deleteDoc(memRef(uid()))}catch(e){}}
+function stopListeners(){if(membersUnsub){try{membersUnsub()}catch(e){}membersUnsub=null}signalUnsubs.forEach(f=>{try{f()}catch(e){}});signalUnsubs=[];subscribed.clear()}
+async function closePeer(id){const p=peers.get(String(id));if(!p)return;try{p.pc.close()}catch(e){}if(p.audio){try{p.audio.pause();p.audio.srcObject=null;p.audio.remove()}catch(e){}}peers.delete(String(id))}
+async function closeAll(){for(const id of [...peers.keys()])await closePeer(id)}
+async function peer(remote,initiator){remote=String(remote);if(remote===uid())return;let p=peers.get(remote);if(p)return p;const pc=new RTCPeerConnection(ICE);p={pc,audio:null};peers.set(remote,p);if(stream)stream.getTracks().forEach(t=>pc.addTrack(t,stream));pc.ontrack=e=>{let a=p.audio;if(!a){a=document.createElement('audio');a.autoplay=true;a.playsInline=true;a.style.display='none';document.body.appendChild(a);p.audio=a}if(e.streams[0]){a.srcObject=e.streams[0];a.muted=deafened;}a.play().catch(()=>{})};pc.onicecandidate=async e=>{if(!e.candidate)return;try{await fs().addDoc(fs().collection(db(),VC,VOICE_ROOM,'signals',sigId(uid(),remote),'candidates'),{from:uid(),candidate:e.candidate.toJSON(),createdAt:new Date().toISOString()})}catch(x){}};pc.onconnectionstatechange=()=>{if(pc.connectionState==='failed')setTimeout(()=>{if(joined){closePeer(remote);ensure(remote)}},1200)};if(initiator){const offer=await pc.createOffer();await pc.setLocalDescription(offer);await fs().setDoc(sigRef(uid(),remote),{a:uid(),b:remote,offer:{type:offer.type,sdp:offer.sdp},offerFrom:uid(),updatedAt:new Date().toISOString()},{merge:true})}return p}
+async function signal(remote,data){if(!joined)return;const initiator=uid()<String(remote),p=await peer(remote,initiator);if(!p)return;const pc=p.pc;try{if(data.offer&&String(data.offerFrom)!==uid()&&!pc.currentRemoteDescription){await pc.setRemoteDescription(data.offer);const a=await pc.createAnswer();await pc.setLocalDescription(a);await fs().setDoc(sigRef(uid(),remote),{answer:{type:a.type,sdp:a.sdp},answerFrom:uid(),updatedAt:new Date().toISOString()},{merge:true})}else if(data.answer&&String(data.answerFrom)!==uid()&&pc.signalingState==='have-local-offer'&&!pc.currentRemoteDescription)await pc.setRemoteDescription(data.answer)}catch(e){console.warn('voice signal',e)}}
+async function subscribePeer(remote){remote=String(remote);const key=sigId(uid(),remote);if(subscribed.has(key))return;subscribed.add(key);const sr=sigRef(uid(),remote);signalUnsubs.push(fs().onSnapshot(sr,s=>{if(s.exists())signal(remote,s.data())}));const cr=fs().collection(db(),VC,VOICE_ROOM,'signals',key,'candidates');signalUnsubs.push(fs().onSnapshot(cr,s=>{const p=peers.get(remote);if(!p)return;s.docChanges().forEach(c=>{if(c.type==='added'){const x=c.doc.data();if(String(x.from)!==uid()&&x.candidate)p.pc.addIceCandidate(x.candidate).catch(()=>{})}})}))}
+async function ensure(remote){if(!joined)return;await subscribePeer(remote);await peer(remote,uid()<String(remote))}
+async function subscribeMembers(){stopListeners();const mr=fs().collection(db(),VC,VOICE_ROOM,'members');membersUnsub=fs().onSnapshot(mr,async s=>{const ms=s.docs.map(d=>d.data()).filter(m=>!stale(m));render(ms);if(!joined)return;for(const m of ms)if(String(m.uid)!==uid())await ensure(m.uid);for(const id of [...peers.keys()])if(!ms.some(m=>String(m.uid)===id))await closePeer(id)},()=>err('Voice room connection failed. Check Firebase configuration/rules.'))}
+window.joinLungeVoice=async()=>{if(!u()){openAuth('login');return}if(!window.__lungeFirebaseReady||!db()){err('Voice requires the real Firebase Web App configuration.');return}if(joined)return;err('');state('Requesting microphone…');try{stream=await navigator.mediaDevices.getUserMedia({audio:{echoCancellation:true,noiseSuppression:true,autoGainControl:true},video:false});joined=true;muted=false;deafened=false;window.__lungeVoice.joined=true;window.__lungeVoice.deafened=false;await publish();await subscribeMembers();const snap=await fs().getDocs(fs().collection(db(),VC,VOICE_ROOM,'members'));const ms=snap.docs.map(d=>d.data()).filter(m=>!stale(m));for(const m of ms)if(String(m.uid)!==uid())await ensure(m.uid);heartbeat=setInterval(()=>publish().catch(()=>{}),12000);document.getElementById('voiceJoinBtn').disabled=true;document.getElementById('voiceMuteBtn').disabled=false;document.getElementById('voiceDeafenBtn').disabled=false;document.getElementById('voiceLeaveBtn').disabled=false;state('🟢 In voice');document.getElementById('voiceOrb')?.classList.remove('off');err('You joined the Lunge MC voice room.',true)}catch(e){joined=false;window.__lungeVoice.joined=false;stream?.getTracks().forEach(t=>t.stop());stream=null;state('Not connected');err(e.name==='NotAllowedError'?'Microphone permission was denied. Allow microphone access and try again.':(e.message||'Could not join voice.'))}}
+window.toggleLungeVoiceMute=()=>{if(!stream)return;muted=!muted;stream.getAudioTracks().forEach(t=>t.enabled=!muted);window.__lungeVoice.muted=muted;publish().catch(()=>{});const b=document.getElementById('voiceMuteBtn');if(b)b.textContent=muted?'🎙️ Unmute Mic':'🔇 Mute Mic';document.getElementById('voiceOrb')?.classList.toggle('muted',muted);renderVoiceCurrent().catch(()=>{})}
+window.toggleLungeVoiceDeafen=async()=>{
+  if(!joined)return;
+  deafened=!deafened;
+  for(const p of peers.values()){
+    if(p.audio){p.audio.muted=deafened;if(!deafened)p.audio.play().catch(()=>{});}
+  }
+  window.__lungeVoice.deafened=deafened;
+  const b=document.getElementById('voiceDeafenBtn');
+  if(b)b.textContent=deafened?'🔇 Undeafen':'🔊 Deafen';
+  const orb=document.getElementById('voiceOrb'); if(orb)orb.classList.toggle('muted',deafened);
+  await publish().catch(()=>{});
+  err(deafened?'You are deafened — other players cannot be heard.':'Voice audio restored.',true);
+};
+async function renderVoiceCurrent(){if(!db())return;const s=await fs().getDocs(fs().collection(db(),VC,VOICE_ROOM,'members'));render(s.docs.map(d=>d.data()).filter(m=>!stale(m)))}
+window.leaveLungeVoice=async(silent=false)=>{if(!joined&&!stream)return;joined=false;window.__lungeVoice.joined=false;clearInterval(heartbeat);heartbeat=null;stopListeners();await closeAll();stream?.getTracks().forEach(t=>t.stop());stream=null;await removePresence();muted=false;deafened=false;window.__lungeVoice.muted=false;window.__lungeVoice.deafened=false;const b=document.getElementById('voiceMuteBtn');if(b){b.disabled=true;b.textContent='🔇 Mute Mic'}const d=document.getElementById('voiceDeafenBtn');if(d){d.disabled=true;d.textContent='🔊 Deafen'}const l=document.getElementById('voiceLeaveBtn');if(l)l.disabled=true;const j=document.getElementById('voiceJoinBtn');if(j)j.disabled=!window.__lungeFirebaseReady||!u();document.getElementById('voiceOrb')?.classList.add('off');state('Not connected');if(!silent)err('You left the voice room.',true)};
+window.addEventListener('beforeunload',()=>{try{stream?.getTracks().forEach(t=>t.stop());removePresence()}catch(e){}});window.addEventListener('load',()=>setTimeout(refreshVoiceAccess,900));
+</script>
+</body></html>
